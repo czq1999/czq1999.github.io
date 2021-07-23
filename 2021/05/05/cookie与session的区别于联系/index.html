@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="cookie和session对比 cookie:以键值对的形式保存在客户端浏览器上的信息 session:以键值对的形式保存在服务端上的信息  HTTP机制 HTTP协议是无状态的协议，一旦数据数据交换无比，客户端与服务器的连接就会关闭，再次交换数据就需要建立新的连接，这意味着服务器无法从连接上跟踪会话。  cookie机制 工作原理：服务器给客户端颁发的通行证，访问服务器时必须携带通行证进行访问">
+  <meta name="description" content="cookie和session 对比  cookie:以键值对的形式保存在客户端浏览器上的信息 session:以键值对的形式保存在服务端上的信息  HTTP机制  HTTP协议是无状态的协议，一旦数据数据交换无比，客户端与服务器的连接就会关闭，再次交换数据就需要建立新的连接，这意味着服务器无法从连接上跟踪会话。  cookie机制  工作原理：服务器给客户端颁发的通行证，访">
 <meta property="og:type" content="article">
 <meta property="og:title" content="cookie与session的区别于联系">
 <meta property="og:url" content="http://example.com/2021/05/05/cookie%E4%B8%8Esession%E7%9A%84%E5%8C%BA%E5%88%AB%E4%BA%8E%E8%81%94%E7%B3%BB/index.html">
 <meta property="og:site_name" content="陈子强的博客">
-<meta property="og:description" content="cookie和session对比 cookie:以键值对的形式保存在客户端浏览器上的信息 session:以键值对的形式保存在服务端上的信息  HTTP机制 HTTP协议是无状态的协议，一旦数据数据交换无比，客户端与服务器的连接就会关闭，再次交换数据就需要建立新的连接，这意味着服务器无法从连接上跟踪会话。  cookie机制 工作原理：服务器给客户端颁发的通行证，访问服务器时必须携带通行证进行访问">
+<meta property="og:description" content="cookie和session 对比  cookie:以键值对的形式保存在客户端浏览器上的信息 session:以键值对的形式保存在服务端上的信息  HTTP机制  HTTP协议是无状态的协议，一旦数据数据交换无比，客户端与服务器的连接就会关闭，再次交换数据就需要建立新的连接，这意味着服务器无法从连接上跟踪会话。  cookie机制  工作原理：服务器给客户端颁发的通行证，访">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-05-05T07:25:53.000Z">
 <meta property="article:modified_time" content="2021-05-05T07:28:37.608Z">
@@ -229,36 +229,33 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="cookie和session"><a href="#cookie和session" class="headerlink" title="cookie和session"></a>cookie和session</h2><h4 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h4><ul>
+        <h2 id="cookie和session">cookie和session</h2>
+<h4 id="对比">对比</h4>
+<ul>
 <li>cookie:以键值对的形式保存在客户端浏览器上的信息</li>
 <li>session:以键值对的形式保存在服务端上的信息</li>
 </ul>
-<h4 id="HTTP机制"><a href="#HTTP机制" class="headerlink" title="HTTP机制"></a>HTTP机制</h4><ul>
+<h4 id="http机制">HTTP机制</h4>
+<ul>
 <li>HTTP协议是无状态的协议，一旦数据数据交换无比，客户端与服务器的连接就会关闭，再次交换数据就需要建立新的连接，这意味着服务器无法从连接上跟踪会话。</li>
 </ul>
-<h4 id="cookie机制"><a href="#cookie机制" class="headerlink" title="cookie机制"></a>cookie机制</h4><ul>
-<li><p>工作原理：服务器给客户端颁发的通行证，访问服务器时必须携带通行证进行访问</p>
-</li>
-<li><p>不可跨域名性：域名不同的网站不能互相操作彼此的cookie</p>
-</li>
-<li><p>编码：ASCII字符，Unicode编码(中文)，BASE64编码(二进制数据)</p>
-</li>
-<li><p>安全性：直接在cookie中保存用户名和密码比较危险。</p>
-</li>
+<h4 id="cookie机制">cookie机制</h4>
+<ul>
+<li><p>工作原理：服务器给客户端颁发的通行证，访问服务器时必须携带通行证进行访问</p></li>
+<li><p>不可跨域名性：域名不同的网站不能互相操作彼此的cookie</p></li>
+<li><p>编码：ASCII字符，Unicode编码(中文)，BASE64编码(二进制数据)</p></li>
+<li><p>安全性：直接在cookie中保存用户名和密码比较危险。</p></li>
 <li><p>解决方案：</p>
 <p>1.把加密的密码保存到cookie中。也可保存时间戳来替代保存密码。</p>
-<p>2.把账号保存在cookie中，把账号连同密码保存用加密算法保存到ssid的cookie中。</p>
-</li>
-<li><p>应用：浏览器中的记住我的登陆状态。</p>
-</li>
+<p>2.把账号保存在cookie中，把账号连同密码保存用加密算法保存到ssid的cookie中。</p></li>
+<li><p>应用：浏览器中的记住我的登陆状态。</p></li>
 </ul>
-<h4 id="session机制："><a href="#session机制：" class="headerlink" title="session机制："></a>session机制：</h4><ul>
-<li><p>工作原理：如果说cookie是查看”通行证“来确定身份，那么session机制就是检查服务器上的”客户明细表“来确定身份。</p>
-</li>
+<h4 id="session机制">session机制：</h4>
+<ul>
+<li><p>工作原理：如果说cookie是查看”通行证“来确定身份，那么session机制就是检查服务器上的”客户明细表“来确定身份。</p></li>
 <li><p>两种实现方式：</p>
 <p><strong>1.通过cookie实现</strong></p>
-<p><strong>2.通过URL重写实现</strong></p>
-</li>
+<p><strong>2.通过URL重写实现</strong></p></li>
 </ul>
 <p><strong>总结：cookie弥补了HTTP无状态的不足，让服务器知道来的人是谁，但是cookie以文本的形式保存在本地，自身的安全性较差；因此通过cookie识别不同的用户，对应的在session里保存私密的信息以及超过4096字节的文本</strong></p>
 
@@ -344,7 +341,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie%E5%92%8Csession"><span class="nav-number">1.</span> <span class="nav-text">cookie和session</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E6%AF%94"><span class="nav-number">1.0.1.</span> <span class="nav-text">对比</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP%E6%9C%BA%E5%88%B6"><span class="nav-number">1.0.2.</span> <span class="nav-text">HTTP机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cookie%E6%9C%BA%E5%88%B6"><span class="nav-number">1.0.3.</span> <span class="nav-text">cookie机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#session%E6%9C%BA%E5%88%B6%EF%BC%9A"><span class="nav-number">1.0.4.</span> <span class="nav-text">session机制：</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie%E5%92%8Csession"><span class="nav-number">1.</span> <span class="nav-text">cookie和session</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E6%AF%94"><span class="nav-number">1.0.1.</span> <span class="nav-text">对比</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#http%E6%9C%BA%E5%88%B6"><span class="nav-number">1.0.2.</span> <span class="nav-text">HTTP机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cookie%E6%9C%BA%E5%88%B6"><span class="nav-number">1.0.3.</span> <span class="nav-text">cookie机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#session%E6%9C%BA%E5%88%B6"><span class="nav-number">1.0.4.</span> <span class="nav-text">session机制：</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
