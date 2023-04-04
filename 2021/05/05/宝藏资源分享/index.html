@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="NLP、DL、LeetCode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="宝藏资源分享">
+<meta property="og:url" content="http://example.com/2021/05/05/%E5%AE%9D%E8%97%8F%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/index.html">
+<meta property="og:site_name" content="陈子强的博客">
+<meta property="og:description" content="NLP、DL、LeetCode">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-05T07:52:37.000Z">
+<meta property="article:modified_time" content="2021-05-05T09:23:43.187Z">
+<meta property="article:author" content="zqchen">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="NLP">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="资源推荐">
+<meta property="article:tag" content="LeetCode">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/05/05/%E5%AE%9D%E8%97%8F%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>宝藏资源分享 | 陈子强的博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?eaaa0b4e12e5341798d03199e03e10d8# <app_id>";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">陈子强的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录自学和读研的点滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/05/%E5%AE%9D%E8%97%8F%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20210506/QQ头像.jpg">
+      <meta itemprop="name" content="zqchen">
+      <meta itemprop="description" content="在这个内卷的社会，一起加油">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈子强的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          宝藏资源分享
+        </h1>
+
+        <div class="post-meta">
+          
+              <i class="fa fa-thumb-tack"></i>
+              <font color=green>置顶</font>
+              <span class="post-meta-divider">|</span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-05-05 15:52:37 / 修改时间：17:23:43" itemprop="dateCreated datePublished" datetime="2021-05-05T15:52:37+08:00">2021-05-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%B5%84%E6%BA%90/" itemprop="url" rel="index"><span itemprop="name">资源</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">NLP、DL、LeetCode</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="宝藏资源收藏分享">宝藏资源收藏分享</h1>
+<p>本文整理了我目前觉得还算不错的GitHub资源，分为<strong>NLP</strong>、<strong>深度学习</strong>和<strong>基本知识</strong></p>
+<h2 id="nlp">NLP</h2>
+<ul>
+<li>nlp-tutorial（实现了NLP的一些模型的代码）
+<ul>
+<li>GitHub链接： <a target="_blank" rel="noopener" href="https://github.com/graykode/nlp-tutorial">graykode/nlp-tutorial: Natural Language Processing Tutorial for Deep Learning Researchers (github.com)</a></li>
+</ul></li>
+<li>ML-NLP:
+<ul>
+<li>GitHub: <a target="_blank" rel="noopener" href="https://github.com/NLP-LOVE/ML-NLP">NLP-LOVE/ML-NLP: 此项目是机器学习(Machine Learning)、深度学习(Deep Learning)、NLP面试中常考到的知识点和代码实现，也是作为一个算法工程师必会的理论基础知识。 (github.com)</a></li>
+</ul></li>
+<li>邱锡鹏老师推荐的NLP入门实战
+<ul>
+<li>GItHub：<a target="_blank" rel="noopener" href="https://github.com/FudanNLP/nlp-beginner">FudanNLP/nlp-beginner: NLP上手教程 (github.com)</a></li>
+</ul></li>
+<li>NLP中文相关资料：
+<ul>
+<li>GitHub：<a target="_blank" rel="noopener" href="https://github.com/crownpku/Awesome-Chinese-NLP">crownpku/Awesome-Chinese-NLP: A curated list of resources for Chinese NLP 中文自然语言处理相关资料 (github.com)</a></li>
+</ul></li>
+<li>rumor推荐的NLP学习路线
+<ul>
+<li>知乎回答链接：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/19895141/answer/1650139426">自然语言处理怎么最快入门？ - 知乎</a></li>
+<li>GItHub：<a target="_blank" rel="noopener" href="https://github.com/leerumor/nlp_tutorial">leerumor/nlp_tutorial: NLP超强入门指南，包括各任务sota模型汇总（文本分类、文本匹配、序列标注、文本生成、语言模型），以及代码、技巧 (github.com)</a></li>
+</ul></li>
+<li>NLP会议代码：
+<ul>
+<li>GItHub：<a target="_blank" rel="noopener" href="https://github.com/yizhen20133868/NLP-Conferences-Code">yizhen20133868/NLP-Conferences-Code: NLP-Conferences-Code (ACL、EMNL、NAACL、COLING、AAAI、IJCAI) (github.com)</a></li>
+</ul></li>
+<li>HanLP
+<ul>
+<li>GitHub: <a target="_blank" rel="noopener" href="https://github.com/hankcs/HanLP">hankcs/HanLP: 中文分词 词性标注 命名实体识别 依存句法分析 语义依存分析 新词发现 关键词短语提取 自动摘要 文本分类聚类 拼音简繁转换 自然语言处理 (github.com)</a></li>
+</ul></li>
+</ul>
+<h2 id="深度学习">深度学习</h2>
+<ul>
+<li>深度学习入门教程 （CV+NLP+推荐系统+基础知识应有尽有）
+<ul>
+<li>GItHub：<a target="_blank" rel="noopener" href="https://github.com/Mikoto10032/DeepLearning">GitHub - Mikoto10032/DeepLearning: 深度学习入门教程, 优秀文章, Deep Learning Tutorial</a></li>
+</ul></li>
+<li>AI（机器学习-&gt;深度学习-&gt;自然语言处理）
+<ul>
+<li>GitHub： <a target="_blank" rel="noopener" href="https://github.com/apachecn/AiLearning">GitHub - apachecn/AiLearning: AiLearning: 机器学习 - MachineLearning - ML、深度学习 - DeepLearning - DL、自然语言处理 NLP</a></li>
+</ul></li>
+<li>深度学习500问（对面试比较友好）
+<ul>
+<li>概率论、线性代数、机器学习、深度学习、CV</li>
+<li>GitHub： <a target="_blank" rel="noopener" href="https://github.com/scutan90/DeepLearning-500-questions">GitHub - scutan90/DeepLearning-500-questions: 深度学习500问</a></li>
+<li><strong>book链接1</strong>： <a target="_blank" rel="noopener" href="http://zqchen1999.gitee.io/deeplearning-500-questions/#/">简介 - 深度学习500问 (gitee.io)</a></li>
+<li><strong>book链接2</strong>：<a target="_blank" rel="noopener" href="https://czq1999.github.io/500-book/#/">简介 - 深度学习500问 (czq1999.github.io)</a></li>
+</ul></li>
+<li>动手学深度学习（沐神）
+<ul>
+<li>v1
+<ul>
+<li>GitHub-pytorch链接：<a target="_blank" rel="noopener" href="https://github.com/ShusenTang/Dive-into-DL-PyTorch">GitHub - ShusenTang/Dive-into-DL-PyTorch: 本项目将《动手学深度学习》(Dive into Deep Learning)原书中的MXNet实现改为PyTorch实现。</a></li>
+<li><strong>book-pytorch链接</strong>： <a target="_blank" rel="noopener" href="https://czq1999.github.io/pytorch-book/#/">简介 - Dive-into-DL-PyTorch (czq1999.github.io)</a></li>
+<li>权威官网-<strong>MxNet</strong>：<a target="_blank" rel="noopener" href="https://zh.d2l.ai/index.html">《动手学深度学习》：面向中文读者、能运行、可讨论 (d2l.ai)</a></li>
+</ul></li>
+<li>v2
+<ul>
+<li>权威官网<a target="_blank" rel="noopener" href="http://zh-v2.d2l.ai/">《动手学深度学习》 — 动手学深度学习 2.0.0-alpha0 documentation (d2l.ai)</a></li>
+<li>B站： <a target="_blank" rel="noopener" href="https://space.bilibili.com/1567748478">动手学深度学习的个人空间 - 哔哩哔哩 ( ゜- ゜)つロ 乾杯~ Bilibili</a></li>
+</ul></li>
+</ul></li>
+<li>神经网络与深度学习-蒲公英书（复旦邱锡鹏老师）
+<ul>
+<li>GitHub链接：<a target="_blank" rel="noopener" href="https://github.com/nndl/nndl.github.io">nndl/nndl.github.io: 《神经网络与深度学习》 邱锡鹏著 Neural Network and Deep Learning</a></li>
+<li><strong>Book链接</strong>：<a target="_blank" rel="noopener" href="https://nndl.github.io/nndl-book.pdf">神经网络与深度学习 (nndl.github.io)</a></li>
+</ul></li>
+</ul>
+<h2 id="技术面试基本知识leetcode">技术面试基本知识+LeetCode</h2>
+<ul>
+<li>CS-Notes
+<ul>
+<li>GItHub：<a target="_blank" rel="noopener" href="https://github.com/CyC2018/CS-Notes">CyC2018/CS-Notes: 技术面试必备基础知识、Leetcode、计算机操作系统、计算机网络、系统设计 (github.com)</a></li>
+<li><strong>book链接</strong>：https://www.cyc2018.xyz/</li>
+</ul></li>
+<li>大厂面试LeetCode题：
+<ul>
+<li>GitHub: <a target="_blank" rel="noopener" href="https://github.com/afatcoder/LeetcodeTop">afatcoder/LeetcodeTop: 汇总各大互联网公司容易考察的高频leetcode题🔥 (github.com)</a></li>
+</ul></li>
+<li>力扣加加：
+<ul>
+<li>GitHub：<a target="_blank" rel="noopener" href="https://github.com/azl397985856/leetcode">azl397985856/leetcode: LeetCode Solutions: A Record of My Problem Solving Journey.( leetcode题解，记录自己的leetcode解题之路。) (github.com)</a></li>
+<li><strong>book链接</strong>：https://leetcode-solution-leetcode-pp.gitbook.io/leetcode-solution/</li>
+</ul></li>
+<li>图解LeetCode：
+<ul>
+<li>GitHub：<a target="_blank" rel="noopener" href="https://github.com/MisterBooo/LeetCodeAnimation">MisterBooo/LeetCodeAnimation: Demonstrate all the questions on LeetCode in the form of animation.（用动画的形式呈现解LeetCode题目的思路） (github.com)</a></li>
+</ul></li>
+<li>Fucking algorithm（labuladong）：
+<ul>
+<li>GitHub: <a target="_blank" rel="noopener" href="https://github.com/labuladong/fucking-algorithm">labuladong/fucking-algorithm: 刷算法全靠套路，认准 labuladong 就够了！English version supported! Crack LeetCode, not only how, but also why. (github.com)</a></li>
+<li><strong>book链接</strong>：https://labuladong.gitee.io/algo</li>
+</ul></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag"># 深度学习</a>
+              <a href="/tags/NLP/" rel="tag"># NLP</a>
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+              <a href="/tags/%E8%B5%84%E6%BA%90%E6%8E%A8%E8%8D%90/" rel="tag"># 资源推荐</a>
+              <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/05/05/%E5%85%B3%E4%BA%8EDjango%E4%B8%AD%E8%BF%9E%E6%8E%A5MySQL%E6%8A%A5%E9%94%99%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" rel="prev" title="关于Django中连接MySQL报错的解决方法">
+      <i class="fa fa-chevron-left"></i> 关于Django中连接MySQL报错的解决方法
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/05/16/Transformer/" rel="next" title="Transformer">
+      Transformer <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9D%E8%97%8F%E8%B5%84%E6%BA%90%E6%94%B6%E8%97%8F%E5%88%86%E4%BA%AB"><span class="nav-number">1.</span> <span class="nav-text">宝藏资源收藏分享</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#nlp"><span class="nav-number">1.1.</span> <span class="nav-text">NLP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.2.</span> <span class="nav-text">深度学习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86leetcode"><span class="nav-number">1.3.</span> <span class="nav-text">技术面试基本知识+LeetCode</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="zqchen"
+      src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20210506/QQ头像.jpg">
+  <p class="site-author-name" itemprop="name">zqchen</p>
+  <div class="site-description" itemprop="description">在这个内卷的社会，一起加油</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/czq1999/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;czq1999&#x2F;" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://si.ahu.edu.cn/" title="http:&#x2F;&#x2F;si.ahu.edu.cn&#x2F;" rel="noopener" target="_blank">安徽大学互联网学院</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://cic.tju.edu.cn/" title="http:&#x2F;&#x2F;cic.tju.edu.cn&#x2F;" rel="noopener" target="_blank">天津大学智能与计算学部</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zqchen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

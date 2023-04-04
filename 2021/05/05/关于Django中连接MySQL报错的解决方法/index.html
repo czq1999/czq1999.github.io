@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="django连接mysql sha256密码验证">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于Django中连接MySQL报错的解决方法">
+<meta property="og:url" content="http://example.com/2021/05/05/%E5%85%B3%E4%BA%8EDjango%E4%B8%AD%E8%BF%9E%E6%8E%A5MySQL%E6%8A%A5%E9%94%99%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="陈子强的博客">
+<meta property="og:description" content="django连接mysql sha256密码验证">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210105105421581.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMzczMjEy,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210105105443155.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMzczMjEy,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210105105459620.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210105105512309.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMzczMjEy,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210105105653529.png#pic_center">
+<meta property="article:published_time" content="2021-05-05T07:32:31.000Z">
+<meta property="article:modified_time" content="2021-05-05T07:51:35.034Z">
+<meta property="article:author" content="zqchen">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="数据库">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210105105421581.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMzczMjEy,size_16,color_FFFFFF,t_70#pic_center">
+
+<link rel="canonical" href="http://example.com/2021/05/05/%E5%85%B3%E4%BA%8EDjango%E4%B8%AD%E8%BF%9E%E6%8E%A5MySQL%E6%8A%A5%E9%94%99%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>关于Django中连接MySQL报错的解决方法 | 陈子强的博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?eaaa0b4e12e5341798d03199e03e10d8# <app_id>";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">陈子强的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录自学和读研的点滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/05/%E5%85%B3%E4%BA%8EDjango%E4%B8%AD%E8%BF%9E%E6%8E%A5MySQL%E6%8A%A5%E9%94%99%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20210506/QQ头像.jpg">
+      <meta itemprop="name" content="zqchen">
+      <meta itemprop="description" content="在这个内卷的社会，一起加油">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈子强的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          关于Django中连接MySQL报错的解决方法
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-05-05 15:32:31 / 修改时间：15:51:35" itemprop="dateCreated datePublished" datetime="2021-05-05T15:32:31+08:00">2021-05-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/Django/" itemprop="url" rel="index"><span itemprop="name">Django</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">django连接mysql sha256密码验证</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="关于django中连接mysql数据库报错的解决方法runtimeerror-cryptography-package-is-required-for-sha256_password-or-caching_sha2_password-auth-methods">关于Django中连接mysql数据库报错的解决方法：RuntimeError: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods</h1>
+<h2 id="一问题发现">一、问题发现</h2>
+<p>安装MySQL8的条件下，在Django中连接MySQL数据库时会发生如下错误：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">Exception <span class="keyword">in</span> thread django-main-thread:</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;C:\Users\zqchen7\Anaconda3\envs\dev_2.2_3.6\lib\threading.py&quot;</span>, line <span class="number">916</span>, <span class="keyword">in</span> _bootstrap_inner</span><br><span class="line">    self.run()</span><br><span class="line">  File <span class="string">&quot;C:\Users\zqchen7\Anaconda3\envs\dev_2.2_3.6\lib\threading.py&quot;</span>, line <span class="number">864</span>, <span class="keyword">in</span> run</span><br><span class="line">    self._target(*self._args, **self._kwargs)</span><br><span class="line">  File <span class="string">&quot;C:\Users\zqchen7\Anaconda3\envs\dev_2.2_3.6\lib\site-packages\django\utils\autoreload.py&quot;</span>, line <span class="number">54</span>, <span class="keyword">in</span> wrapper</span><br><span class="line">    fn(*args, **kwargs)</span><br><span class="line">  File <span class="string">&quot;C:\Users\zqchen7\Anaconda3\envs\dev_2.2_3.6\lib\site-packages\django\core\management\commands\runserver.py&quot;</span>, line <span class="number">120</span>, <span class="keyword">in</span> inner_run</span><br><span class="line">    self.check_migrations()</span><br><span class="line">  File <span class="string">&quot;C:\Users\zqchen7\Anaconda3\envs\dev_2.2_3.6\lib\site-packages\django\core\management\base.py&quot;</span>, line <span class="number">453</span>, <span class="keyword">in</span> check_migrations</span><br><span class="line">    executor = MigrationExecutor(connections[DEFAULT_DB_ALIAS])</span><br><span class="line">  File <span class="string">&quot;C:\Users\zqchen7\Anaconda3\envs\dev_2.2_3.6\lib\site-packages\django\db\migrations\executor.py&quot;</span>, line <span class="number">18</span>, <span class="keyword">in</span> __init__</span><br><span class="line">    self.loader = MigrationLoader(self.connection)</span><br><span class="line">  File <span class="string">&quot;C:\Users\zqchen7\Anaconda3\envs\dev_2.2_3.6\lib\site-packages\django\db\migrations\loader.py&quot;</span>, line <span class="number">49</span>, <span class="keyword">in</span> __init__</span><br><span class="line">    self.build_graph()</span><br><span class="line">  File <span class="string">&quot;C:\Users\zqchen7\Anaconda3\envs\dev_2.2_3.6\lib\site-packages\django\db\migrations\loader.py&quot;</span>, line <span class="number">212</span>, <span class="keyword">in</span> build_graph</span><br><span class="line">    self.applied_migrations = recorder.applied_migrations()</span><br><span class="line">  File <span class="string">&quot;C:\Users\zqchen7\Anaconda3\envs\dev_2.2_3.6\lib\site-packages\django\db\migrations\recorder.py&quot;</span>, line <span class="number">73</span>, <span class="keyword">in</span> applied_migrations</span><br><span class="line">    <span class="keyword">if</span> self.has_table():</span><br><span class="line">  File <span class="string">&quot;C:\Users\zqchen7\Anaconda3\envs\dev_2.2_3.6\lib\site-packages\django\db\migrations\recorder.py&quot;</span>, line <span class="number">56</span>, <span class="keyword">in</span> has_table</span><br><span class="line">    <span class="keyword">return</span> self.Migration._meta.db_table <span class="keyword">in</span> self.connection.introspection.table_names(self.connection.cursor())</span><br><span class="line">  File <span class="string">&quot;C:\Users\zqchen7\Anaconda3\envs\dev_2.2_3.6\lib\site-packages\django\db\backends\base\base.py&quot;</span>, line <span class="number">256</span>, <span class="keyword">in</span> cursor</span><br><span class="line">    <span class="keyword">return</span> self._cursor()</span><br><span class="line">  File <span class="string">&quot;C:\Users\zqchen7\Anaconda3\envs\dev_2.2_3.6\lib\site-packages\django\db\backends\base\base.py&quot;</span>, line <span class="number">233</span>, <span class="keyword">in</span> _cursor</span><br><span class="line">    self.ensure_connection()</span><br><span class="line">  File <span class="string">&quot;C:\Users\zqchen7\Anaconda3\envs\dev_2.2_3.6\lib\site-packages\django\db\backends\base\base.py&quot;</span>, line <span class="number">217</span>, <span class="keyword">in</span> ensure_connection</span><br><span class="line">    self.connect()</span><br><span class="line">  File <span class="string">&quot;C:\Users\zqchen7\Anaconda3\envs\dev_2.2_3.6\lib\site-packages\django\db\backends\base\base.py&quot;</span>, line <span class="number">195</span>, <span class="keyword">in</span> connect</span><br><span class="line">    self.connection = self.get_new_connection(conn_params)</span><br><span class="line">  File <span class="string">&quot;C:\Users\zqchen7\Anaconda3\envs\dev_2.2_3.6\lib\site-packages\django\db\backends\mysql\base.py&quot;</span>, line <span class="number">227</span>, <span class="keyword">in</span> get_new_connection</span><br><span class="line">    <span class="keyword">return</span> Database.connect(**conn_params)</span><br><span class="line">  File <span class="string">&quot;C:\Users\zqchen7\Anaconda3\envs\dev_2.2_3.6\lib\site-packages\pymysql\__init__.py&quot;</span>, line <span class="number">94</span>, <span class="keyword">in</span> Connect</span><br><span class="line">    <span class="keyword">return</span> Connection(*args, **kwargs)</span><br><span class="line">  File <span class="string">&quot;C:\Users\zqchen7\Anaconda3\envs\dev_2.2_3.6\lib\site-packages\pymysql\connections.py&quot;</span>, line <span class="number">327</span>, <span class="keyword">in</span> __init__</span><br><span class="line">    self.connect()</span><br><span class="line">  File <span class="string">&quot;C:\Users\zqchen7\Anaconda3\envs\dev_2.2_3.6\lib\site-packages\pymysql\connections.py&quot;</span>, line <span class="number">588</span>, <span class="keyword">in</span> connect</span><br><span class="line">    self._request_authentication()</span><br><span class="line">  File <span class="string">&quot;C:\Users\zqchen7\Anaconda3\envs\dev_2.2_3.6\lib\site-packages\pymysql\connections.py&quot;</span>, line <span class="number">874</span>, <span class="keyword">in</span> _request_authentication</span><br><span class="line">    auth_packet = _auth.caching_sha2_password_auth(self, auth_packet)</span><br><span class="line">  File <span class="string">&quot;C:\Users\zqchen7\Anaconda3\envs\dev_2.2_3.6\lib\site-packages\pymysql\_auth.py&quot;</span>, line <span class="number">326</span>, <span class="keyword">in</span> caching_sha2_password_auth</span><br><span class="line">    data = sha2_rsa_encrypt(conn.password, conn.salt, conn.server_public_key)</span><br><span class="line">  File <span class="string">&quot;C:\Users\zqchen7\Anaconda3\envs\dev_2.2_3.6\lib\site-packages\pymysql\_auth.py&quot;</span>, line <span class="number">204</span>, <span class="keyword">in</span> sha2_rsa_encrypt</span><br><span class="line">    <span class="keyword">raise</span> RuntimeError(<span class="string">&quot;&#x27;cryptography&#x27; package is required for sha256_password or caching_sha2_password auth methods&quot;</span>)</span><br><span class="line">RuntimeError: <span class="string">&#x27;cryptography&#x27;</span> package <span class="keyword">is</span> required <span class="keyword">for</span> sha256_password <span class="keyword">or</span> caching_sha2_password auth methods</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="二问题分析">二、问题分析</h2>
+<p>原因是从MySQL8开始后使用新的加密方式 caching-sha2-password，而之前使用的加密方式为mysql_native_password，因此hi存在不兼容的情况。</p>
+<h2 id="三问题解决">三、问题解决</h2>
+<p>汇总网上现有的方法共计三种解决方案（三选一即可）： + 把root用户的密码加密方式改为mysql_native_password</p>
+<ol type="1">
+<li>windows下安装的MySQL8客户端，打开MySQL 8.0 Command Line Client</li>
+</ol>
+<figure>
+<img src="https://img-blog.csdnimg.cn/20210105105421581.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMzczMjEy,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
+</figure>
+<ol start="2" type="1">
+<li><p>输入<code>ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '1234';</code>更新一下用户的密码为1234,密码可以按照自己的需求进行更改。</p></li>
+<li><p>刷新权限<code>FLUSH PRIVILEGES; #刷新权限</code></p></li>
+</ol>
+<figure>
+<img src="https://img-blog.csdnimg.cn/20210105105443155.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMzczMjEy,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
+</figure>
+<ul>
+<li><p>安装'cryptography'<strong>（最简单，推荐使用）</strong></p>
+<p>有虚拟环境的先进虚拟环境<code>conda activate ***</code>，没有虚拟环境的直接在命令行窗口中敲如下代码</p>
+<p><code>pip install cryptography</code></p></li>
+<li><p>使用DBeaver的用户在设置中的驱动属性allowPublicKeyRetrieval改为True<strong>(每次重启电脑后都需要重新设置一次，不推荐)</strong></p></li>
+</ul>
+<ol type="1">
+<li>右击localhost点击编辑连接</li>
+</ol>
+<figure>
+<img src="https://img-blog.csdnimg.cn/20210105105459620.png#pic_center" alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
+</figure>
+<ol start="2" type="1">
+<li><p>修改驱动属性allowPublicKeyRetrieval改为True <img src="https://img-blog.csdnimg.cn/20210105105512309.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMzczMjEy,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" /></p></li>
+<li><p>重新连接，点击是</p></li>
+</ol>
+<figure>
+<img src="https://img-blog.csdnimg.cn/20210105105653529.png#pic_center" alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
+</figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"># 数据库</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/05/05/dataframe%E7%9A%84%E4%B8%80%E4%BA%9B%E7%94%A8%E6%B3%95/" rel="prev" title="dataframe的一些用法">
+      <i class="fa fa-chevron-left"></i> dataframe的一些用法
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/05/05/%E5%AE%9D%E8%97%8F%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/" rel="next" title="宝藏资源分享">
+      宝藏资源分享 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8Edjango%E4%B8%AD%E8%BF%9E%E6%8E%A5mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%A5%E9%94%99%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95runtimeerror-cryptography-package-is-required-for-sha256_password-or-caching_sha2_password-auth-methods"><span class="nav-number">1.</span> <span class="nav-text">关于Django中连接mysql数据库报错的解决方法：RuntimeError: &#39;cryptography&#39; package is required for sha256_password or caching_sha2_password auth methods</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E9%97%AE%E9%A2%98%E5%8F%91%E7%8E%B0"><span class="nav-number">1.1.</span> <span class="nav-text">一、问题发现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90"><span class="nav-number">1.2.</span> <span class="nav-text">二、问题分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3"><span class="nav-number">1.3.</span> <span class="nav-text">三、问题解决</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="zqchen"
+      src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20210506/QQ头像.jpg">
+  <p class="site-author-name" itemprop="name">zqchen</p>
+  <div class="site-description" itemprop="description">在这个内卷的社会，一起加油</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/czq1999/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;czq1999&#x2F;" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://si.ahu.edu.cn/" title="http:&#x2F;&#x2F;si.ahu.edu.cn&#x2F;" rel="noopener" target="_blank">安徽大学互联网学院</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://cic.tju.edu.cn/" title="http:&#x2F;&#x2F;cic.tju.edu.cn&#x2F;" rel="noopener" target="_blank">天津大学智能与计算学部</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zqchen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

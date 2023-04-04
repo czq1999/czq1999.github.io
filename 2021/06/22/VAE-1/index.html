@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="自编码器 Auto—Encoder">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VAE-自编码器">
+<meta property="og:url" content="http://example.com/2021/06/22/VAE-1/index.html">
+<meta property="og:site_name" content="陈子强的博客">
+<meta property="og:description" content="自编码器 Auto—Encoder">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20210622/image-20210622142216740.6aluuxsyd9g0.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20210622/VAE2.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20210622/VAE3.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200924153534286.png#pic_center">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20210622/VAE4.png">
+<meta property="article:published_time" content="2021-06-22T09:13:31.000Z">
+<meta property="article:modified_time" content="2021-06-22T10:28:48.127Z">
+<meta property="article:author" content="zqchen">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20210622/image-20210622142216740.6aluuxsyd9g0.png">
+
+<link rel="canonical" href="http://example.com/2021/06/22/VAE-1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>VAE-自编码器 | 陈子强的博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?eaaa0b4e12e5341798d03199e03e10d8# <app_id>";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">陈子强的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录自学和读研的点滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/22/VAE-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20210506/QQ头像.jpg">
+      <meta itemprop="name" content="zqchen">
+      <meta itemprop="description" content="在这个内卷的社会，一起加油">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈子强的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          VAE-自编码器
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-06-22 17:13:31 / 修改时间：18:28:48" itemprop="dateCreated datePublished" datetime="2021-06-22T17:13:31+08:00">2021-06-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B/" itemprop="url" rel="index"><span itemprop="name">生成模型</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">自编码器 Auto—Encoder</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <ul>
+<li><h1 id="auto-encoder">Auto-Encoder</h1>
+<h2 id="定义">定义</h2>
+<p>定义：Auto-Encoder是一种通过无监督的方式来学习一组数据的有效表示。</p>
+<h2 id="形式">形式</h2>
+<p>形式：原始D维样本-&gt;Encoder-&gt;M维-&gt;Decoder-&gt;D维</p>
+<h2 id="目标">目标</h2>
+<p>目标：自编码器的学习 目标是最小化重构误差，即经过Decoder还原的向量与原始向量相差最小。</p>
+<h2 id="示意图">示意图</h2>
+<p><img src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20210622/image-20210622142216740.6aluuxsyd9g0.png" /></p>
+<h2 id="变形">变形</h2>
+<ul>
+<li><p>稀疏自编码器</p>
+<p>基本的自编码器通常是学习低维的编码，当需要学习的隐藏维度D大于样本的维度，同时希望编码尽可能的稀疏，这就是稀疏自编码器。</p></li>
+<li><p>堆叠自编码器 两层神经网络的自编码器不足以获得好的数据表示，使用更深的网络以捕获数据的语义信息，这就是堆叠自编码器。</p></li>
+<li><p>降噪自编码器</p>
+<p>原始数据引入噪声，再送入Encoder,让Decoder的输出还原原始输入。</p>
+<p>如何引入噪声：输入的数据随机用0进行mask</p></li>
+</ul>
+<h2 id="特点">特点</h2>
+<ul>
+<li><p>非监督学习</p></li>
+<li><p>拥有特征提取能力</p></li>
+<li><p>使用神经网络对数据进行降维，这是一种非线性的</p></li>
+</ul>
+<h2 id="变分自编码器">变分自编码器</h2>
+<p>​ VAE 产生了输入数据中不包含的数据，（可以认为产生了含有某种特定信息的新的数据），而 AE 只能产生尽可能接近或者就是以前的数据（当数据简单时，编码解码损耗少时）。</p>
+<p>​ 若给定一个数据集，如果我们想要根据这个来生成新的数据。假如我们知道这个分布是什么样，那么我们就可以在这个分布上进行sample进而便可以生成出新的数据。如下图的宝可梦服从<span class="math inline">\(P(x)\)</span>分布，我们如果知道这个分布便可以进行生成新的数据，但是现在并不知道这个分布啊。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20210622/VAE2.png" /></p>
+<p>​ 退而求其次，我们如果知道一个隐变量z的分布，将z的分布和数据分布<span class="math inline">\(P(x)\)</span>进行映射。这样，如果给一个z我们边将其对应到数据分布上即可。即 <span class="math display">\[
+P(x)=\int_{z}p(z)p(x|z)dz
+\]</span> 一般假设<span class="math inline">\(p(z)\)</span>和<span class="math inline">\(p(x|z)\)</span>是正态分布，只是参数未知，因此可以通过最大似然来进行估计。这一步假设相当于假设隐变量z每个点对应一个高斯分布，z的取值有无穷个，因此数据的分布服从于无穷维的高斯混合分布。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20210622/VAE3.png" /></p>
+<h3 id="公式推导"><strong>公式推导</strong></h3>
+<p><span class="math display">\[
+logP(x)=log(P(x))\int_zq(z|x)dz=\int_zq(z|x)log(P(x))dz
+\]</span></p>
+<p>引入一个变分密度函数<span class="math inline">\(q(z|x)\)</span>可以是任意分布,这一步相当于等价变换 <span class="math display">\[
+logP(x)=\int_zq(z|x)log{\frac{P(z,x)}{P(z|x)}}dz\\=\int_zq(z|x)log{(\frac{P(z,x)}{q(z|x)} \frac{q(z|x)}{P(z|x)})}dz\\=\int_zq(z|x)log({\frac{P(z,x)}{q(z|X)}})dz+\int_zq(z|x)log(\frac{q(z|x)}{P(z|x)})dz
+\]</span> 在上式中，因为<span class="math inline">\(\int_zq(z|x)log(\frac{q(z|x)}{P(z|x)})dz=KL(q(z|x)||P(z|x))\)</span>，因为KL散度衡大于等于0，上式存在下界<span class="math inline">\(ELBO=L_b=\int_zq(z|x)log({\frac{P(z,x)}{q(z|X)}})dz\)</span></p>
+<p>此时， <span class="math display">\[
+logP(x)=L_b+KL(q(z|x)||P(z|x))logP(x)=L_b+KL(q(z|x)||P(z|x))
+\]</span> 此时最大化对数似然可以使用EM算法来求解：</p>
+<p>（1）E步：固定<span class="math inline">\(P(z|x)\)</span>，使得<span class="math inline">\(q(z|x)\)</span>尽可能的等于或接近<span class="math inline">\(P(z|x)\)</span>。使用神经网络调参逼近来将KL=0。也可以理解为让神经网络学习到原始数据和隐变量z的对应关系。</p>
+<p>（2）M步：固定<span class="math inline">\(q(z|x)\)</span>使得EMLO最大。</p>
+<p><img src="https://img-blog.csdnimg.cn/20200924153534286.png#pic_center" /> <span class="math display">\[
+ELBO=\int_zq(z|x)log(\frac{P(x|z)P(z)}{q(z|x)})dz\\=\int_zq(z|x)log(\frac{p(z)}{q(z|x)})dz+\int_zq(z|x)log(p(x|z))dz\\=-KL(q(z|x)||p(z))+E_{q(z|x)}log(P(x|z))
+\]</span> 因此最大化ELBO等价于，最小化第一项（Encoder），最大化第二项（Decoder）。</p>
+<p>最小化第一项：让<span class="math inline">\(q(z|x)\)</span>分布和<span class="math inline">\(p(z)\)</span>分布越近越好，因为假设<span class="math inline">\(p(z)\)</span>分从正态分布，这便相当于让<span class="math inline">\(q(z|x)\)</span>和正态分布越近越好。这一步相当于，对编码器输出的分布进行约束。</p>
+<p>最大化第二项：相当于通过x采样到的隐变量z，用z还原x与原始的x相近。这一步相当于使得重构误差最小。!<img src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20210622/VAE4.png" /></p>
+<h3 id="本质">本质</h3>
+<p>VAE的本质相当于为每个样本构造专属的均值和方差，然后重构采样。<span class="math inline">\(P(x)=\int_{z}p(z)p(x|z)dz\)</span>相当于先确定隐变量z属于哪类样本，然后根据这类的样本生成一个新的x。这种方法显式的估计了数据分布的密度函数。</p>
+<h3 id="与gan的区别">与GAN的区别</h3>
+<ul>
+<li>区别1：loss不同。VAE的loss是pointwise loss即重构损失，对比重构的X和原始输入X的差距，虽然也有KL散度，但是本质是让encoder的输出尽可能与正态分布相近。GAN的loss是衡量分布之间的loss，GAN的loss可以转换为JS散度。</li>
+<li>区别2：是否为显式的概率密度函数。VAE中神经网络只是用来拟合假定的分布，这样限制了神经网络的能力。GAN中低维的正态分布P(z)，直接用神经网络学习一个映射函数<span class="math inline">\(G:z\rightarrow x\)</span>，这个映射函数便是生成器。</li>
+</ul>
+<p>函数，这个映射函数便是生成器。</p></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag"># 深度学习</a>
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/05/16/Transformer/" rel="prev" title="Transformer">
+      <i class="fa fa-chevron-left"></i> Transformer
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/07/23/%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E7%BB%BC%E8%BF%B0/" rel="next" title="预训练模型综述">
+      预训练模型综述 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#auto-encoder"><span class="nav-number">1.</span> <span class="nav-text">Auto-Encoder</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BD%A2%E5%BC%8F"><span class="nav-number">1.2.</span> <span class="nav-text">形式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87"><span class="nav-number">1.3.</span> <span class="nav-text">目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A4%BA%E6%84%8F%E5%9B%BE"><span class="nav-number">1.4.</span> <span class="nav-text">示意图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E5%BD%A2"><span class="nav-number">1.5.</span> <span class="nav-text">变形</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E7%82%B9"><span class="nav-number">1.6.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E5%88%86%E8%87%AA%E7%BC%96%E7%A0%81%E5%99%A8"><span class="nav-number">1.7.</span> <span class="nav-text">变分自编码器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC"><span class="nav-number">1.7.1.</span> <span class="nav-text">公式推导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E8%B4%A8"><span class="nav-number">1.7.2.</span> <span class="nav-text">本质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8Egan%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.7.3.</span> <span class="nav-text">与GAN的区别</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="zqchen"
+      src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20210506/QQ头像.jpg">
+  <p class="site-author-name" itemprop="name">zqchen</p>
+  <div class="site-description" itemprop="description">在这个内卷的社会，一起加油</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/czq1999/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;czq1999&#x2F;" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://si.ahu.edu.cn/" title="http:&#x2F;&#x2F;si.ahu.edu.cn&#x2F;" rel="noopener" target="_blank">安徽大学互联网学院</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://cic.tju.edu.cn/" title="http:&#x2F;&#x2F;cic.tju.edu.cn&#x2F;" rel="noopener" target="_blank">天津大学智能与计算学部</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zqchen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
