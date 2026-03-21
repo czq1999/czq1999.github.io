@@ -158,6 +158,11 @@
     <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">9</span></a>
 
   </li>
+        <li class="menu-item menu-item-works">
+
+    <a href="/works/" rel="section"><i class="fa fa-briefcase fa-fw"></i>作品集</a>
+
+  </li>
         <li class="menu-item menu-item-commonweal">
 
     <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
@@ -251,114 +256,104 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="思想">思想</h1>
-<p>​ Visual Semantic Embedding(VSE)是跨模态检索中的常见方法。旨在学习一个嵌入空间，具有相同语义的视觉和文本在空间中距离相近。然而现在的VSE方法使用复杂的方法将多模态的信息聚合为整体特征。例：注意力加权，图神经网络，seq2seq。本文发现了使用简单的池化策略进行特征聚合在跨模态检索任务上可以超越复杂模型的性能。池化策略聚合特征具有简单和有效性，但是如何在不同模态的数据上进行聚合特征，本文提出了generalized pooling operator（GPO）自动学习最佳池化策略。</p>
+        <h1 id="思想"><a href="#思想" class="headerlink" title="思想"></a>思想</h1><p>​        Visual Semantic Embedding(VSE)是跨模态检索中的常见方法。旨在学习一个嵌入空间，具有相同语义的视觉和文本在空间中距离相近。然而现在的VSE方法使用复杂的方法将多模态的信息聚合为整体特征。例：注意力加权，图神经网络，seq2seq。本文发现了使用简单的池化策略进行特征聚合在跨模态检索任务上可以超越复杂模型的性能。池化策略聚合特征具有简单和有效性，但是如何在不同模态的数据上进行聚合特征，本文提出了generalized pooling operator（GPO）自动学习最佳池化策略。</p>
 <p>补：跨模态检索中VSE的过程</p>
-<p><img src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20211101/图片1.png" /></p>
-<ol type="1">
+<p><img src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20211101/图片1.png" alt=""></p>
+<ol>
 <li><strong>Input</strong>：输入图像和文本。</li>
 <li><strong>Feature Extractor</strong>：提取视觉和文本的特征。对于图像来说，为了加速模型的训练，图像已经被提取为了向量当做数据集。一般分为两种：global和local。对于global，一个图像提取一个4096维向量。对于local一个图片使用RCNN提取36个region，每个region是2048维向量，即张量表示为（batch_size, 36, 2048）。本文暂时不考虑global的视觉当做输入。对于文本来说一般使用LSTM，GRU提取特征，最近两年的文章一般使用BERT提取文本表示即（batch_size, tokens,dim）。</li>
 <li><strong>Aggregator</strong>：这一步的本质是将图像的多个region聚合为一个视觉表示。对于文本则是将一句话的多个token聚合为一个文本表示。常见的方法为：注意力，图神经网络。</li>
-<li><strong>Embedding Space</strong>：在嵌入空间中度量相似性。大部分方法使用余弦相似度进行度量，同时结合三元损失（思想类似于CV中的facenet，相似的image-text pair在空间中的距离要近，不相似的距离要远）。这就不可避免的需要进行负样本采样，这里需要提一下<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1707.05612">VSE++</a>提出了困难负样本，即训练的时候考虑拉大困难的负样本之间的距离。大大提高的模型准确率。数学上也比较好理解，如果最容易模型将最容易当成正样本的负样本给识别出来了，那么其他的样本也没问题，即<span class="math inline">\(max &gt;= sum\)</span></li>
+<li><strong>Embedding Space</strong>：在嵌入空间中度量相似性。大部分方法使用余弦相似度进行度量，同时结合三元损失（思想类似于CV中的facenet，相似的image-text pair在空间中的距离要近，不相似的距离要远）。这就不可避免的需要进行负样本采样，这里需要提一下<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1707.05612">VSE++</a>提出了困难负样本，即训练的时候考虑拉大困难的负样本之间的距离。大大提高的模型准确率。数学上也比较好理解，如果最容易模型将最容易当成正样本的负样本给识别出来了，那么其他的样本也没问题，即$max &gt;= sum$</li>
 </ol>
-<h1 id="模型">模型</h1>
-<h2 id="三种池化策略">三种池化策略</h2>
-<ul>
+<h1 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h1><h2 id="三种池化策略"><a href="#三种池化策略" class="headerlink" title="三种池化策略"></a>三种池化策略</h2><ul>
 <li>最大池化：取最大值</li>
 <li>均值池化：取均值</li>
 <li>K最大池化：取前k个最大值求平均</li>
 </ul>
-<h2 id="从一个例子来看池化策略">从一个例子来看池化策略：</h2>
-<p>栗子：假设一个班有三个人（一句话有多个token），每个人期末考试的三门分数给定（每个token的特征给定），那么现在怎么用一个三维的向量代表这个班级的成绩呢（如何聚合一句话中多个token的表示）？</p>
+<h2 id="从一个例子来看池化策略："><a href="#从一个例子来看池化策略：" class="headerlink" title="从一个例子来看池化策略："></a>从一个例子来看池化策略：</h2><p>栗子：假设一个班有三个人（一句话有多个token），每个人期末考试的三门分数给定（每个token的特征给定），那么现在怎么用一个三维的向量代表这个班级的成绩呢（如何聚合一句话中多个token的表示）？</p>
 <p>一个简单的解法就是：取均值池化来代表这个班级成绩。但是在实际情况中，均值池化往往不一定适用于所有问题。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20211101/图片2.png" /></p>
+<p><img src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20211101/图片2.png" alt=""></p>
 <p>现在把向量的每一维度按照从大到小排序，然后乘以对应的系数进行加权。</p>
 <ul>
-<li>若<span class="math inline">\(θ_1=1, θ_2,..,n=0\)</span>。等价于max pool</li>
-<li>若<span class="math inline">\(θ_{1,…,n}=\frac{1}{N}\)</span>.等价于mean pool</li>
-<li>若<span class="math inline">\(θ_{1,..k}=\frac{1}{k},θ_{k+1,…,N}=0\)</span>,等价于K-max pool</li>
+<li>若$θ_1=1, θ_2,..,n=0$。等价于max pool</li>
+<li>若$θ_{1,…,n}=\frac{1}{N}$.等价于mean pool</li>
+<li>若$θ_{1,..k}=\frac{1}{k},θ_{k+1,…,N}=0$,等价于K-max pool</li>
 </ul>
-<p>可以看到<span class="math inline">\(\theta\)</span>取这三种情况时便对应上了最大池化、平均池化、和k最大池化。如果<span class="math inline">\(\theta\)</span>取可以任意取值，那么是不是可以说模型能捕获一些我们未知但是更优更适用于特定任务的池化策略呢？GPO便是这个思想。</p>
-<h2 id="gpo的池化策略">GPO的池化策略：</h2>
-<p><img src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20211101/图片3.png" /></p>
+<p>可以看到$\theta$取这三种情况时便对应上了最大池化、平均池化、和k最大池化。如果$\theta$取可以任意取值，那么是不是可以说模型能捕获一些我们未知但是更优更适用于特定任务的池化策略呢？GPO便是这个思想。</p>
+<h2 id="GPO的池化策略："><a href="#GPO的池化策略：" class="headerlink" title="GPO的池化策略："></a>GPO的池化策略：</h2><p><img src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20211101/图片3.png" alt=""></p>
 <p>三个问题阐述GPO</p>
 <ul>
-<li><p><span class="math inline">\(\phi_1, ..., \phi_N\)</span>表示多个local表示（文本中就是token，图像中就是region）。那么问题来了如何计算这个权重系数(<span class="math inline">\(\theta_1,...,\theta_k,...,\theta_N\)</span>)呢？因为考虑到每次输入的token都是不同长度的，所以必须得考虑用一个能解决输入长度不固定的模型。作者考虑到了使用RNN中的GRU，得益于其结构相对于LSTM简单，故作者选择了GRU让模型的输入权重。</p></li>
-<li><p>GRU的输出搞清楚了，那么输入是什么呢？作者使用的是Transformer中的位置编码作为GRU的输入。</p></li>
-<li><p>还有个问题对于文本来说每个batch输入不同的句子，每个句子的长度是不一样的。那么图像怎么办呢？前面说道，现在用的数据集是一张图片提取36个region，那么对于图像来说每个batch输入不同的图片，每个图片都是36个region。现在看来和文本不一样了呀？作者采用了一个Data Augmentation的方法，就是对于一张图片的36个region，每个region随机赋予初值，只有初值大于0.2的region才被模型输入。换句话说，就是随机选大约80%的region当做输入。以此将图像的region变为不固定的数目。</p></li>
+<li><p>$\phi_1, …, \phi_N$表示多个local表示（文本中就是token，图像中就是region）。那么问题来了如何计算这个权重系数($\theta_1,…,\theta_k,…,\theta_N$)呢？因为考虑到每次输入的token都是不同长度的，所以必须得考虑用一个能解决输入长度不固定的模型。作者考虑到了使用RNN中的GRU，得益于其结构相对于LSTM简单，故作者选择了GRU让模型的输入权重。</p>
+</li>
+<li><p>GRU的输出搞清楚了，那么输入是什么呢？作者使用的是Transformer中的位置编码作为GRU的输入。</p>
+</li>
+<li><p>还有个问题对于文本来说每个batch输入不同的句子，每个句子的长度是不一样的。那么图像怎么办呢？前面说道，现在用的数据集是一张图片提取36个region，那么对于图像来说每个batch输入不同的图片，每个图片都是36个region。现在看来和文本不一样了呀？作者采用了一个Data Augmentation的方法，就是对于一张图片的36个region，每个region随机赋予初值，只有初值大于0.2的region才被模型输入。换句话说，就是随机选大约80%的region当做输入。以此将图像的region变为不固定的数目。</p>
+</li>
 </ul>
-<h1 id="我的疑惑">我的疑惑</h1>
-<h2 id="gpo中使用transformer位置编码是什么样的">GPO中使用Transformer位置编码是什么样的？</h2>
-<p>GPO的本质是一个Bi-GRU 所以输入为三维的张量</p>
+<h1 id="我的疑惑"><a href="#我的疑惑" class="headerlink" title="我的疑惑"></a>我的疑惑</h1><h2 id="GPO中使用Transformer位置编码是什么样的？"><a href="#GPO中使用Transformer位置编码是什么样的？" class="headerlink" title="GPO中使用Transformer位置编码是什么样的？"></a>GPO中使用Transformer位置编码是什么样的？</h2><p>GPO的本质是一个Bi-GRU 所以输入为三维的张量</p>
 <ul>
-<li><p>对于一般用于处理文本的GRU来说输入为张量<span class="math inline">\([batch\_size, max\_tokens, dim]\)</span>. 代表batch_size个句子作为输入，所有输入中句子的最大长度为max_tokens， 每个token使用dim维来表示</p></li>
-<li><p>对于GPO中用于计算系数的GRU来说输入为张量<span class="math inline">\([batch\_size, max\_tokens,dim]\)</span>. 代表batch_size个句子作为输入，所有输入句子的最大长度为max_tokens，每个token使用dim维来表示。只不过这里每个token的dim维向量使用Transformer中的位置编码进行初始化。</p></li>
+<li><p>对于一般用于处理文本的GRU来说输入为张量$[batch_size, max_tokens, dim]$. 代表batch_size个句子作为输入，所有输入中句子的最大长度为max_tokens， 每个token使用dim维来表示</p>
+</li>
+<li><p>对于GPO中用于计算系数的GRU来说输入为张量$[batch_size, max_tokens,dim]$. 代表batch_size个句子作为输入，所有输入句子的最大长度为max_tokens，每个token使用dim维来表示。只不过这里每个token的dim维向量使用Transformer中的位置编码进行初始化。</p>
+</li>
 </ul>
 <p>Transformer的位置编码公式如下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20211101/图片4.png" /></p>
-<p>pos代表一句话中的第pos个token, i表示当前这个token中的第i维向量是如何计算的，偶数维使用正弦函数计算，奇数维使用余弦函数计算。 <span class="math inline">\(d_{model}\)</span>表示位置编码的维度。</p>
-<p>例子：<img src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20211101/图片5.png" /></p>
-<p>在GPO中位置编码的维度为32，如图所示第一个token的位置编码的pos为0所以位置编码为[0,1,0,...,1]</p>
-<h2 id="transformer位置编码来源-为什么用sin和100002id_model">Transformer位置编码来源 ？（为什么用sin和<span class="math inline">\(10000^{2i/d_{model}}\)</span>）</h2>
-<h3 id="为什么使用sin">为什么使用sin</h3>
-<p>总的原因有两点：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20211101/图片4.png" alt=""></p>
+<p>pos代表一句话中的第pos个token, i表示当前这个token中的第i维向量是如何计算的，偶数维使用正弦函数计算，奇数维使用余弦函数计算。 $d_{model}$表示位置编码的维度。</p>
+<p>例子：<img src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20211101/图片5.png" alt=""></p>
+<p>在GPO中位置编码的维度为32，如图所示第一个token的位置编码的pos为0所以位置编码为[0,1,0,…,1] </p>
+<h2 id="Transformer位置编码来源-？（为什么用sin和-10000-2i-d-model-）"><a href="#Transformer位置编码来源-？（为什么用sin和-10000-2i-d-model-）" class="headerlink" title="Transformer位置编码来源 ？（为什么用sin和$10000^{2i/d_{model}}$）"></a>Transformer位置编码来源 ？（为什么用sin和$10000^{2i/d_{model}}$）</h2><h3 id="为什么使用sin"><a href="#为什么使用sin" class="headerlink" title="为什么使用sin"></a>为什么使用sin</h3><p>总的原因有两点：</p>
 <ul>
-<li><p>sin和cos可以建模相对位置信息：</p></li>
+<li><p>sin和cos可以建模相对位置信息：</p>
+</li>
 <li><p>有界函数</p>
-<p>​ 苏剑林大佬写了一篇很详细的博客说明，Transformer的Sinusoidal位置编码<a target="_blank" rel="noopener" href="https://spaces.ac.cn/archives/8231">Transformer升级之路：1、Sinusoidal位置编码追根溯源 - 科学空间|Scientific Spaces</a></p>
-<p>​ 位置信息包括绝对位置信息和相对位置信息。Transformer即需要绝对位置信息也需要相对位置信息。</p>
-<p>​ 绝对位置信息是代表当前词是第几个token，因为注意力机制没有顺序信息的，即全对称的，例如：如果不加位置信息，（我吃饭， 饭吃我，我饭吃等）对于Transformer来说是一样的。</p>
-<p>​ 相对位置信息是指句子中一个token相对于另一个token的位置。引入相对位置信息便于计算上下文相关性。即离得近的token有高的相关性。即远程衰减。</p>
-<p>​ 对于transformer的输入为<span class="math inline">\(f(...,x_m+p_m,...,x_n+p_n,...)\)</span>。希望通过加入位置编码来打破对称性。即<span class="math inline">\(\tilde f(...,x_m,...,x_n,...)=f(...,x_m+p_m,...,x_n+p_n,...)\)</span>.<span class="math inline">\(p_m, p_n\)</span>为位置编码向量。</p>
-<p>为了简化问题，首先只考虑在m和n上加入位置编码，根据泰勒展开，<span class="math inline">\(\tilde f\)</span> 可以写成：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20211101/图片6.png" /></p>
-<p>第一项为原始输入，第二项到第五项为单一位置的绝对信息，第六项同时包含<span class="math inline">\(p_m，p_n\)</span>，希望第六项包括绝对位置信息。</p>
-<p>​ 假设<span class="math inline">\(p_m^THp_n\)</span>中的<span class="math inline">\(H\)</span>为单位阵，所以<span class="math inline">\(p^T_mHp_n=p^T_mp_n=&lt;p_m,p_n&gt;\)</span>。如何将两个位置编码的内积表达为相对位置信息呢？假设存在每个函数g <span class="math display">\[
-&lt;p_m,p_n&gt;=g(m-n)
-\]</span> 这里的<span class="math inline">\(p_m，p_n\)</span>都是d维向量，这里从d=2入手。</p>
-<p>对于二维向量，借助复数来推导，<span class="math inline">\(&lt;p_m,p_n&gt;=Re[p_m^{&#39;} p_n^{*&#39;}]\)</span>。即两个数的内积等于第一个复数和第二个复数的共轭乘积的实部。例如：<span class="math inline">\([3,5]\cdot[1,6]=33\)</span> 。<span class="math inline">\(p_m^{&#39;}p_n^{*&#39;}\)</span>表示复数，即<span class="math inline">\(p_m^{&#39;}p_n^{*&#39;}=(3+5i)(1-6i)=33-13i\)</span>，其中实部33刚好是我们想要的，<span class="math inline">\(&lt;(3,5),(1,6)&gt;= Re[33-13i]\)</span>。</p>
-<p><span class="math inline">\(p_m^{&#39;}p_n^{*&#39;}=q_{m-n}\)</span>. 根据欧拉公式 <span class="math display">\[
-a+bi=re^{i\theta}=rcos\theta+risin\theta, \\a=rcos\theta,bi=risin\theta
-\]</span></p>
-<p><span class="math display">\[
-p_m^{&#39;}=r_me^{i\theta_m},p_n^{*&#39;}=r_ne^{-i\theta_n},q_{m-n}=R_{m-n}e^{i\Theta_{m-n}}
-\]</span></p>
-<p>可以得到 <span class="math display">\[
-r_mr_n=R_{m-n}\\\theta_m-\theta_n=\Theta_{m-n}
-\]</span></p>
-<ul>
-<li><p>对于第一个式子，为了便于计算，设<span class="math inline">\(r_m=r_n=1\)</span>。对应到位置编码中每个编码的模长为1</p></li>
-<li><p>对于第二个式子，带入<span class="math inline">\(n=0\)</span>,得<span class="math inline">\(\theta_m-\theta_n=\Theta_m\)</span>,为了便于计算设<span class="math inline">\(\theta_0=0\)</span>。对应到位置编码中第一个token的<span class="math inline">\(\theta=0\)</span></p></li>
-<li><p>对于第二个式子带入<span class="math inline">\(n=m-1\)</span>, 可以得到<span class="math inline">\(\theta_m-\theta_{m-1}=\Theta_1=\theta_1\)</span>。<span class="math inline">\(\theta_m\)</span>为等差数列，通解为<span class="math inline">\(m_\theta\)</span></p></li>
+</li>
 </ul>
-<p>所以<span class="math inline">\(\boldsymbol{p}_{m}^{&#39;}=\left(\begin{array}{c} \cos m \theta \\ \sin m \theta \end{array}\right)\)</span></p>
+<p>  ​        苏剑林大佬写了一篇很详细的博客说明，Transformer的Sinusoidal位置编码<a target="_blank" rel="noopener" href="https://spaces.ac.cn/archives/8231">Transformer升级之路：1、Sinusoidal位置编码追根溯源 - 科学空间|Scientific Spaces</a></p>
+<p>  ​        位置信息包括绝对位置信息和相对位置信息。Transformer即需要绝对位置信息也需要相对位置信息。</p>
+<p>  ​        绝对位置信息是代表当前词是第几个token，因为注意力机制没有顺序信息的，即全对称的，例如：如果不加位置信息，（我吃饭， 饭吃我，我饭吃等）对于Transformer来说是一样的。</p>
+<p>  ​        相对位置信息是指句子中一个token相对于另一个token的位置。引入相对位置信息便于计算上下文相关性。即离得近的token有高的相关性。即远程衰减。</p>
+<p>  ​        对于transformer的输入为$f(…,x_m+p_m,…,x_n+p_n,…)$。希望通过加入位置编码来打破对称性。即$\tilde f(…,x_m,…,x_n,…)=f(…,x_m+p_m,…,x_n+p_n,…)$.$p_m, p_n$为位置编码向量。</p>
+<p>  为了简化问题，首先只考虑在m和n上加入位置编码，根据泰勒展开，$\tilde f$ 可以写成：</p>
+<p>  <img src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20211101/图片6.png" alt=""></p>
+<p>  第一项为原始输入，第二项到第五项为单一位置的绝对信息，第六项同时包含$p_m，p_n$，希望第六项包括绝对位置信息。</p>
+<p>  ​        假设$p_m^THp_n$中的$H$为单位阵，所以$p^T_mHp_n=p^T_mp_n=<p_m,p_n>$。如何将两个位置编码的内积表达为相对位置信息呢？假设存在每个函数g</p>
+<script type="math/tex; mode=display">
+  <p_m,p_n>=g(m-n)</script><p>  这里的$p_m，p_n$都是d维向量，这里从d=2入手。</p>
+<p>  对于二维向量，借助复数来推导，$<p_m,p_n>=Re[p_m^{‘} p_n^{<em>‘}]$。即两个数的内积等于第一个复数和第二个复数的共轭乘积的实部。例如：$[3,5]\cdot[1,6]=33$ 。$p_m^{‘}p_n^{</em>‘}$表示复数，即$p_m^{‘}p_n^{*’}=(3+5i)(1-6i)=33-13i$，其中实部33刚好是我们想要的，$&lt;(3,5),(1,6)&gt;= Re[33-13i]$。</p>
+<p>  $p_m^{‘}p_n^{*’}=q_{m-n}$. 根据欧拉公式</p>
+<script type="math/tex; mode=display">
+  a+bi=re^{i\theta}=rcos\theta+risin\theta, \\a=rcos\theta,bi=risin\theta</script><script type="math/tex; mode=display">
+  p_m^{'}=r_me^{i\theta_m},p_n^{*'}=r_ne^{-i\theta_n},q_{m-n}=R_{m-n}e^{i\Theta_{m-n}}</script><p>  可以得到</p>
+<script type="math/tex; mode=display">
+  r_mr_n=R_{m-n}\\\theta_m-\theta_n=\Theta_{m-n}</script><ul>
+<li><p>对于第一个式子，为了便于计算，设$r_m=r_n=1$。对应到位置编码中每个编码的模长为1</p>
+</li>
+<li><p>对于第二个式子，带入$n=0$,得$\theta_m-\theta_n=\Theta_m$,为了便于计算设$\theta_0=0$。对应到位置编码中第一个token的$\theta=0$</p>
+</li>
+<li><p>对于第二个式子带入$n=m-1$, 可以得到$\theta_m-\theta_{m-1}=\Theta_1=\theta_1$。$\theta_m$为等差数列，通解为$m_\theta$</p>
+<p>所以$\boldsymbol{p}_{m}^{‘}=\left(\begin{array}{c}<br>\cos m \theta \\<br>\sin m \theta<br>\end{array}\right)$</p>
 <p>由于内积满足线性叠加性，所以更高的偶数维位置编码可以表示为多个二维编码的组合</p>
-<p><img src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20211101/图片7.png" /></p></li>
+<p><img src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20211101/图片7.png" alt=""></p>
+</li>
 </ul>
-<h3 id="在theta的选取时为什么是theta_i10000-2id">在<span class="math inline">\(\theta\)</span>的选取时为什么是<span class="math inline">\(\theta_i=10000^{-2i/d}\)</span>?</h3>
-<p>原因：选取了这个<span class="math inline">\(\theta\)</span>，随着<span class="math inline">\(|m-n|\)</span>的增大，<span class="math inline">\(&lt;p_m,p_n&gt;\)</span>有区域零的趋势。其实选1000,10000都行。在Transformer中的意思是相对距离越大的token之间<span class="math inline">\(&lt;p_m,p_n&gt;\)</span>越小。三角函数如何呈现衰减趋势呢?</p>
-<p>这里<span class="math inline">\(&lt;p_m,p_n&gt;\)</span>的计算可以转换为高频震荡积分，其具有渐进趋零性。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20211101/图片7.png" /></p>
+<h3 id="在-theta-的选取时为什么是-theta-i-10000-2i-d"><a href="#在-theta-的选取时为什么是-theta-i-10000-2i-d" class="headerlink" title="在$\theta$的选取时为什么是$\theta_i=10000^{-2i/d}$?"></a>在$\theta$的选取时为什么是$\theta_i=10000^{-2i/d}$?</h3><p>原因：选取了这个$\theta$，随着$|m-n|$的增大，$<p_m,p_n>$有区域零的趋势。其实选1000,10000都行。在Transformer中的意思是相对距离越大的token之间$<p_m,p_n>$越小。三角函数如何呈现衰减趋势呢?</p>
+<p>这里$<p_m,p_n>$的计算可以转换为高频震荡积分，其具有渐进趋零性。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20211101/图片7.png" alt=""></p>
 <p>积分结果如下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20211101/图片8.png" />的增加，token之间的<span class="math inline">\(&lt;p_m,p_n&gt;\)</span>越低.</p>
-<p>那么为什么要是10000呢，1000,10000不行吗？事实上，几乎每个<span class="math inline">\([0,1]\)</span>上的光滑函数<span class="math inline">\(\theta_t\)</span>都能是积分具有渐进衰减的趋势</p>
-<p><img src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20211101/图片9.png" /></p>
-<p><img src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20211101/微信截图_20211102105957.png" /></p>
-<p>除了<span class="math inline">\(\theta=t\)</span>, 幂函数在短距离降得快一点，而指数函数则在长距离降得快一点。</p>
-<h2 id="gpo中位置编码对于计算系数是否有用">GPO中位置编码对于计算系数是否有用？</h2>
-<p>实验组：对位置编码进行打乱（random.shuffle()）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20211101/图片8.png" alt="">的增加，token之间的$<p_m,p_n>$越低.</p>
+<p>那么为什么要是10000呢，1000,10000不行吗？事实上，几乎每个$[0,1]$上的光滑函数$\theta_t$都能是积分具有渐进衰减的趋势</p>
+<p><img src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20211101/图片9.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20211101/微信截图_20211102105957.png" alt=""></p>
+<p>除了$\theta=t$, 幂函数在短距离降得快一点，而指数函数则在长距离降得快一点。</p>
+<h2 id="GPO中位置编码对于计算系数是否有用？"><a href="#GPO中位置编码对于计算系数是否有用？" class="headerlink" title="GPO中位置编码对于计算系数是否有用？"></a>GPO中位置编码对于计算系数是否有用？</h2><p>实验组：对位置编码进行打乱（random.shuffle()）</p>
 <p>对照组：原论文中的位置编码</p>
 <p>实验组结果如下：</p>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20211101/图片11.png" alt="图片11" /><figcaption aria-hidden="true">图片11</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20211101/图片11.png" alt="图片11"></p>
 <p>对照组结果如下：</p>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20211101/图片12.png" alt="图片12" /><figcaption aria-hidden="true">图片12</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20211101/图片12.png" alt="图片12"></p>
 <p>结论：位置编码对结果没有产生影响甚至在rsum上有0.6的提升。位置编码可以看为GRU的初始化输入，GPO的权重系数是通过GRU学出来的和初始化并无太大的关系。</p>
-<h1 id="我的思考">我的思考</h1>
-<ul>
+<h1 id="我的思考"><a href="#我的思考" class="headerlink" title="我的思考"></a>我的思考</h1><ul>
 <li>位置编码当做GRU的输入更加侧重于输入的初始化，至于权重的学习，则更加倾向于让模型学出来</li>
 <li>作者在获取图像特征时同时采用region和grid也是一个不错的想法。最后使用ResXNet+BERT把性能跑到了最高，确实很强。</li>
 </ul>
@@ -446,7 +441,7 @@ r_mr_n=R_{m-n}\\\theta_m-\theta_n=\Theta_{m-n}
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%9D%E6%83%B3"><span class="nav-number">1.</span> <span class="nav-text">思想</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E7%A7%8D%E6%B1%A0%E5%8C%96%E7%AD%96%E7%95%A5"><span class="nav-number">2.1.</span> <span class="nav-text">三种池化策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E6%9D%A5%E7%9C%8B%E6%B1%A0%E5%8C%96%E7%AD%96%E7%95%A5"><span class="nav-number">2.2.</span> <span class="nav-text">从一个例子来看池化策略：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gpo%E7%9A%84%E6%B1%A0%E5%8C%96%E7%AD%96%E7%95%A5"><span class="nav-number">2.3.</span> <span class="nav-text">GPO的池化策略：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%88%91%E7%9A%84%E7%96%91%E6%83%91"><span class="nav-number">3.</span> <span class="nav-text">我的疑惑</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#gpo%E4%B8%AD%E4%BD%BF%E7%94%A8transformer%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84"><span class="nav-number">3.1.</span> <span class="nav-text">GPO中使用Transformer位置编码是什么样的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transformer%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81%E6%9D%A5%E6%BA%90-%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8sin%E5%92%8C100002id_model"><span class="nav-number">3.2.</span> <span class="nav-text">Transformer位置编码来源 ？（为什么用sin和\(10000^{2i&#x2F;d_{model}}\)）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8sin"><span class="nav-number">3.2.1.</span> <span class="nav-text">为什么使用sin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8theta%E7%9A%84%E9%80%89%E5%8F%96%E6%97%B6%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AFtheta_i10000-2id"><span class="nav-number">3.2.2.</span> <span class="nav-text">在\(\theta\)的选取时为什么是\(\theta_i&#x3D;10000^{-2i&#x2F;d}\)?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gpo%E4%B8%AD%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81%E5%AF%B9%E4%BA%8E%E8%AE%A1%E7%AE%97%E7%B3%BB%E6%95%B0%E6%98%AF%E5%90%A6%E6%9C%89%E7%94%A8"><span class="nav-number">3.3.</span> <span class="nav-text">GPO中位置编码对于计算系数是否有用？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%88%91%E7%9A%84%E6%80%9D%E8%80%83"><span class="nav-number">4.</span> <span class="nav-text">我的思考</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%9D%E6%83%B3"><span class="nav-number">1.</span> <span class="nav-text">思想</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E7%A7%8D%E6%B1%A0%E5%8C%96%E7%AD%96%E7%95%A5"><span class="nav-number">2.1.</span> <span class="nav-text">三种池化策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E6%9D%A5%E7%9C%8B%E6%B1%A0%E5%8C%96%E7%AD%96%E7%95%A5%EF%BC%9A"><span class="nav-number">2.2.</span> <span class="nav-text">从一个例子来看池化策略：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GPO%E7%9A%84%E6%B1%A0%E5%8C%96%E7%AD%96%E7%95%A5%EF%BC%9A"><span class="nav-number">2.3.</span> <span class="nav-text">GPO的池化策略：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%88%91%E7%9A%84%E7%96%91%E6%83%91"><span class="nav-number">3.</span> <span class="nav-text">我的疑惑</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GPO%E4%B8%AD%E4%BD%BF%E7%94%A8Transformer%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%EF%BC%9F"><span class="nav-number">3.1.</span> <span class="nav-text">GPO中使用Transformer位置编码是什么样的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Transformer%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81%E6%9D%A5%E6%BA%90-%EF%BC%9F%EF%BC%88%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8sin%E5%92%8C-10000-2i-d-model-%EF%BC%89"><span class="nav-number">3.2.</span> <span class="nav-text">Transformer位置编码来源 ？（为什么用sin和$10000^{2i&#x2F;d_{model}}$）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8sin"><span class="nav-number">3.2.1.</span> <span class="nav-text">为什么使用sin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8-theta-%E7%9A%84%E9%80%89%E5%8F%96%E6%97%B6%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF-theta-i-10000-2i-d"><span class="nav-number">3.2.2.</span> <span class="nav-text">在$\theta$的选取时为什么是$\theta_i&#x3D;10000^{-2i&#x2F;d}$?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GPO%E4%B8%AD%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81%E5%AF%B9%E4%BA%8E%E8%AE%A1%E7%AE%97%E7%B3%BB%E6%95%B0%E6%98%AF%E5%90%A6%E6%9C%89%E7%94%A8%EF%BC%9F"><span class="nav-number">3.3.</span> <span class="nav-text">GPO中位置编码对于计算系数是否有用？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%88%91%E7%9A%84%E6%80%9D%E8%80%83"><span class="nav-number">4.</span> <span class="nav-text">我的思考</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

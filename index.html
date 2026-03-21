@@ -141,6 +141,11 @@
     <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">9</span></a>
 
   </li>
+        <li class="menu-item menu-item-works">
+
+    <a href="/works/" rel="section"><i class="fa fa-briefcase fa-fw"></i>作品集</a>
+
+  </li>
         <li class="menu-item menu-item-commonweal">
 
     <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
@@ -298,7 +303,6 @@
 
       
           
-
       
     </div>
 
@@ -848,13 +852,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="pandas中dataframe的一些用法">pandas中Dataframe的一些用法</h1>
-<h4 id="pandas读取excel文件">pandas读取excel文件</h4>
-<ul>
+          <h1 id="pandas中Dataframe的一些用法"><a href="#pandas中Dataframe的一些用法" class="headerlink" title="pandas中Dataframe的一些用法"></a>pandas中Dataframe的一些用法</h1><h4 id="pandas读取excel文件"><a href="#pandas读取excel文件" class="headerlink" title="pandas读取excel文件"></a>pandas读取excel文件</h4><ul>
 <li><strong>pd.read_excel</strong> 前提是安装xlrd库</li>
 </ul>
-<h4 id="dataframenumpylist之间的互相转换">dataframe，numpy，list之间的互相转换</h4>
-<ul>
+<h4 id="dataframe，numpy，list之间的互相转换"><a href="#dataframe，numpy，list之间的互相转换" class="headerlink" title="dataframe，numpy，list之间的互相转换"></a>dataframe，numpy，list之间的互相转换</h4><ul>
 <li>dataframe转numpy ：dataframe对象.values</li>
 <li>dataframe转list：dataframe对象.values.tolist()</li>
 <li>list转numpy：np.array(list对象)</li>
@@ -937,33 +938,36 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="cookie和session">cookie和session</h2>
-<h4 id="对比">对比</h4>
-<ul>
+          <h2 id="cookie和session"><a href="#cookie和session" class="headerlink" title="cookie和session"></a>cookie和session</h2><h4 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h4><ul>
 <li>cookie:以键值对的形式保存在客户端浏览器上的信息</li>
 <li>session:以键值对的形式保存在服务端上的信息</li>
 </ul>
-<h4 id="http机制">HTTP机制</h4>
-<ul>
+<h4 id="HTTP机制"><a href="#HTTP机制" class="headerlink" title="HTTP机制"></a>HTTP机制</h4><ul>
 <li>HTTP协议是无状态的协议，一旦数据数据交换无比，客户端与服务器的连接就会关闭，再次交换数据就需要建立新的连接，这意味着服务器无法从连接上跟踪会话。</li>
 </ul>
-<h4 id="cookie机制">cookie机制</h4>
-<ul>
-<li><p>工作原理：服务器给客户端颁发的通行证，访问服务器时必须携带通行证进行访问</p></li>
-<li><p>不可跨域名性：域名不同的网站不能互相操作彼此的cookie</p></li>
-<li><p>编码：ASCII字符，Unicode编码(中文)，BASE64编码(二进制数据)</p></li>
-<li><p>安全性：直接在cookie中保存用户名和密码比较危险。</p></li>
+<h4 id="cookie机制"><a href="#cookie机制" class="headerlink" title="cookie机制"></a>cookie机制</h4><ul>
+<li><p>工作原理：服务器给客户端颁发的通行证，访问服务器时必须携带通行证进行访问</p>
+</li>
+<li><p>不可跨域名性：域名不同的网站不能互相操作彼此的cookie</p>
+</li>
+<li><p>编码：ASCII字符，Unicode编码(中文)，BASE64编码(二进制数据)</p>
+</li>
+<li><p>安全性：直接在cookie中保存用户名和密码比较危险。</p>
+</li>
 <li><p>解决方案：</p>
 <p>1.把加密的密码保存到cookie中。也可保存时间戳来替代保存密码。</p>
-<p>2.把账号保存在cookie中，把账号连同密码保存用加密算法保存到ssid的cookie中。</p></li>
-<li><p>应用：浏览器中的记住我的登陆状态。</p></li>
+<p>2.把账号保存在cookie中，把账号连同密码保存用加密算法保存到ssid的cookie中。</p>
+</li>
+<li><p>应用：浏览器中的记住我的登陆状态。</p>
+</li>
 </ul>
-<h4 id="session机制">session机制：</h4>
-<ul>
-<li><p>工作原理：如果说cookie是查看”通行证“来确定身份，那么session机制就是检查服务器上的”客户明细表“来确定身份。</p></li>
+<h4 id="session机制："><a href="#session机制：" class="headerlink" title="session机制："></a>session机制：</h4><ul>
+<li><p>工作原理：如果说cookie是查看”通行证“来确定身份，那么session机制就是检查服务器上的”客户明细表“来确定身份。</p>
+</li>
 <li><p>两种实现方式：</p>
 <p><strong>1.通过cookie实现</strong></p>
-<p><strong>2.通过URL重写实现</strong></p></li>
+<p><strong>2.通过URL重写实现</strong></p>
+</li>
 </ul>
 <p><strong>总结：cookie弥补了HTTP无状态的不足，让服务器知道来的人是谁，但是cookie以文本的形式保存在本地，自身的安全性较差；因此通过cookie识别不同的用户，对应的在session里保存私密的信息以及超过4096字节的文本</strong></p>
 
