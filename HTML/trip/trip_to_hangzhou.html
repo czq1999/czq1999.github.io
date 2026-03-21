@@ -1,8 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <meta name="description" content="合肥到杭州双人周末旅行攻略，含G7612/G7646高铁时刻、西湖太子湾灵隐寺行程、杭帮菜美食推荐、费用明细">
+    <meta property="og:title" content="合肥 ⇄ 杭州 · 双人周末攻略">
+    <meta property="og:description" content="含高铁时刻、西湖太子湾灵隐寺行程、杭帮菜美食推荐、双人费用约¥1836">
+    <meta property="og:type" content="article">
     <title>合肥 ⇄ 杭州 · 双人周末（手机优化版）</title>
     <style>
         * {
@@ -283,6 +287,49 @@
             background: #ecf9f5;
             font-size: 0.85rem;
         }
+        /* 内联样式提取 */
+        .transport-layout {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .transport-train {
+            flex: 2;
+            min-width: 240px;
+        }
+        .transport-local {
+            flex: 3;
+        }
+        .transport-list {
+            list-style-type: none;
+            columns: 2;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+        .tips-layout {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .tips-card {
+            flex: 1;
+            min-width: 280px;
+            background: #ebf7f4;
+            border-radius: 30px;
+            padding: 20px;
+        }
+        .sort-hint {
+            font-size: 0.9rem;
+        }
+        /* 平板断点 */
+        @media (max-width: 768px) {
+            .transport-list {
+                columns: 1;
+            }
+            .tips-layout {
+                flex-direction: column;
+            }
+        }
         /* 超小屏微调 */
         @media (max-width: 480px) {
             .timeline-item {
@@ -425,16 +472,16 @@
     <!-- 交通汇总 -->
     <section id="transport">
         <h2>🚗 交通规划明细</h2>
-        <div style="display: flex; flex-wrap: wrap; gap: 20px;">
-            <div style="flex: 2; min-width: 240px;">
+        <div class="transport-layout">
+            <div class="transport-train">
                 <h3>🚄 往返高铁</h3>
                 <p><strong>去程：</strong>G7612 (07:56-10:30) 二等座 ¥205/人</p>
                 <p><strong>返程：</strong>G7646 (17:44-20:14) 二等座 ¥208/人</p>
                 <p class="chip">购票：铁路12306</p>
             </div>
-            <div style="flex: 3;">
+            <div class="transport-local">
                 <h3>🚌 本地交通 (双人总计预估 ¥240)</h3>
-                <ul style="list-style-type: none; columns: 2; gap: 10px; font-size: 0.9rem;">
+                <ul class="transport-list">
                     <li>✅ 酒店⇄太子湾 打车 ¥25</li>
                     <li>✅ 太子湾→苏堤 单车 ¥6</li>
                     <li>✅ 苏堤→河坊街 打车 ¥18</li>
@@ -454,7 +501,7 @@
         <div class="card-grid">
             <div class="card">
                 <div class="img-container">
-                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=260&fit=crop&auto=format" alt="弄堂里" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=260&fit=crop&auto=format" alt="弄堂里桃花湖店 - 卤鸡爪、刀板香蒸饭" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="fallback-text">🍖 弄堂里</div>
                 </div>
                 <div class="card-content">
@@ -462,13 +509,13 @@
                     <p>📍 启迪国际创新港107号</p>
                     <p>🍖 卤鸡爪、刀板香蒸饭</p>
                     <p>💰 人均80-100 | 11:00-21:00</p>
-                    <button class="collapse-btn" onclick="toggleDetail(this)">📎 展开详情</button>
+                    <button class="collapse-btn" aria-expanded="false">📎 展开详情</button>
                     <div class="extra-detail hidden">招牌鸡爪软烂，建议11:30前到。</div>
                 </div>
             </div>
             <div class="card">
                 <div class="img-container">
-                    <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=260&fit=crop" alt="湛碧楼" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=260&fit=crop" alt="湛碧楼湖景餐厅 - 龙井虾仁、脆皮鹅肝酱" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="fallback-text">🌊 湛碧楼</div>
                 </div>
                 <div class="card-content">
@@ -476,13 +523,13 @@
                     <p>📍 杨公堤38号</p>
                     <p>🦐 龙井虾仁、脆皮鹅肝酱</p>
                     <p>💰 人均160 | 需预约</p>
-                    <button class="collapse-btn" onclick="toggleDetail(this)">📎 展开详情</button>
+                    <button class="collapse-btn" aria-expanded="false">📎 展开详情</button>
                     <div class="extra-detail hidden">虎跑泉水牛肉，观日落佳处。</div>
                 </div>
             </div>
             <div class="card">
                 <div class="img-container">
-                    <img src="https://images.unsplash.com/photo-1555126634-323e4e2509d9?w=400&h=260&fit=crop" alt="方传面馆" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1555126634-323e4e2509d9?w=400&h=260&fit=crop" alt="方传酒菜面饭 - 葱油腰花、片儿川" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="fallback-text">🍜 方传面馆</div>
                 </div>
                 <div class="card-content">
@@ -490,13 +537,13 @@
                     <p>📍 钱江路in盒里1号楼</p>
                     <p>🍜 葱油腰花、片儿川</p>
                     <p>💰 人均65 | 07:00-20:30</p>
-                    <button class="collapse-btn" onclick="toggleDetail(this)">📎 展开详情</button>
+                    <button class="collapse-btn" aria-expanded="false">📎 展开详情</button>
                     <div class="extra-detail hidden">腰花处理干净，近河坊街。</div>
                 </div>
             </div>
             <div class="card">
                 <div class="img-container">
-                    <img src="https://images.unsplash.com/photo-1601050799728-1aae7a89b0e8?w=400&h=260&fit=crop" alt="定胜糕" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1601050799728-1aae7a89b0e8?w=400&h=260&fit=crop" alt="蒋顺发定胜糕 - 现做豆沙流心糕点" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="fallback-text">🌸 定胜糕</div>
                 </div>
                 <div class="card-content">
@@ -504,7 +551,7 @@
                     <p>📍 河坊街 / 南宋御街</p>
                     <p>🌸 定胜糕、葱包烩</p>
                     <p>💰 小吃人均20-30</p>
-                    <button class="collapse-btn" onclick="toggleDetail(this)">📎 展开详情</button>
+                    <button class="collapse-btn" aria-expanded="false">📎 展开详情</button>
                     <div class="extra-detail hidden">现做豆沙流心，伴手礼佳。</div>
                 </div>
             </div>
@@ -530,24 +577,24 @@
                     <tr><td>周日早餐</td><td>酒店/知味观</td><td>¥30</td><td>¥60</td><td>定胜糕</td></tr>
                     <tr><td>周日午餐</td><td>龙井村/素斋</td><td>¥80</td><td>¥160</td><td>春笋</td></tr>
                     <tr><td>其他</td><td>水+零食+伴手礼</td><td>¥40</td><td>¥80</td><td>藕粉</td></tr>
-                    <tr class="total-row"><td colspan="3"><strong>总计 (双人)</strong></td><td><strong>¥1836</strong></td><td>约1800-1900</td></tr>
+                    <tr class="total-row"><td colspan="3"><strong>总计 (双人，不含住宿)</strong></td><td><strong>¥1836</strong></td><td>住宿另计</td></tr>
                 </tbody>
             </table>
         </div>
-        <p style="font-size:0.9rem;">✨ 点击表头排序。</p>
+        <p class="sort-hint">✨ 点击表头可升降序排序。</p>
     </section>
 
     <!-- 贴士 -->
     <section id="tips">
         <h2>📌 游玩贴士 · 季节提醒</h2>
-        <div style="display: flex; flex-wrap: wrap; gap: 16px;">
-            <div style="flex:1; background: #ebf7f4; border-radius: 30px; padding: 20px;">
+        <div class=”tips-layout”>
+            <div class=”tips-card”>
                 <h4>🌸 太子湾·预约</h4>
-                <p>3-4月郁金香展需通过“西湖旅游”提前3天预约。</p>
+                <p>3-4月郁金香展需通过”西湖旅游”提前3天预约。</p>
                 <h4>📿 灵隐寺上香</h4>
                 <p>进门赠三支清香；早晨7:30前到避开人流。</p>
             </div>
-            <div style="flex:1; background: #ebf7f4; border-radius: 30px; padding: 20px;">
+            <div class=”tips-card”>
                 <h4>📸 西湖拍照</h4>
                 <p>长桥公园(雷峰夕照)、苏堤北段人少景美。</p>
                 <h4>🚇 交通·支付</h4>
@@ -561,62 +608,73 @@
 </div>
 
 <script>
-    function toggleDetail(btn) {
+    // 事件委托：展开/收起详情
+    document.addEventListener('click', function(e) {
+        const btn = e.target.closest('.collapse-btn');
+        if (!btn) return;
         const extra = btn.nextElementSibling;
-        if (extra.classList.contains('hidden')) {
-            extra.classList.remove('hidden');
-            btn.textContent = '📌 收起详情';
-        } else {
-            extra.classList.add('hidden');
-            btn.textContent = '📎 展开详情';
-        }
-    }
+        const isHidden = extra.classList.contains('hidden');
+        extra.classList.toggle('hidden');
+        btn.setAttribute('aria-expanded', isHidden);
+        btn.textContent = isHidden ? '📌 收起详情' : '📎 展开详情';
+    });
 
+    // 表格排序：支持升降序切换，跳过总计行
+    let sortState = { col: -1, asc: true };
     function sortTable(colIndex) {
         const tbody = document.getElementById("table-body");
-        const rows = Array.from(tbody.rows);
-        const sortedRows = rows.sort((a, b) => {
+        // 切换排序方向
+        if (sortState.col === colIndex) {
+            sortState.asc = !sortState.asc;
+        } else {
+            sortState.col = colIndex;
+            sortState.asc = true;
+        }
+        const dir = sortState.asc ? 1 : -1;
+        // 过滤掉总计行再排序
+        const rows = Array.from(tbody.rows).filter(r => !r.classList.contains('total-row'));
+        const totalRow = Array.from(tbody.rows).find(r => r.classList.contains('total-row'));
+        rows.sort((a, b) => {
             let aText = a.cells[colIndex]?.innerText.replace(/[¥,]/g, '').trim();
             let bText = b.cells[colIndex]?.innerText.replace(/[¥,]/g, '').trim();
             if (colIndex === 0 || colIndex === 1 || colIndex === 4) {
-                return aText.localeCompare(bText, 'zh');
+                return dir * aText.localeCompare(bText, 'zh');
             } else {
-                let aVal = parseFloat(aText) || 0;
-                let bVal = parseFloat(bText) || 0;
-                return aVal - bVal;
+                return dir * ((parseFloat(aText) || 0) - (parseFloat(bText) || 0));
             }
         });
         tbody.innerHTML = '';
-        sortedRows.forEach(row => tbody.appendChild(row));
-        const totalRow = Array.from(tbody.rows).find(r => r.classList.contains('total-row'));
-        if (totalRow) {
-            tbody.removeChild(totalRow);
-            tbody.appendChild(totalRow);
-        }
+        rows.forEach(row => tbody.appendChild(row));
+        if (totalRow) tbody.appendChild(totalRow);
+        // 更新排序图标
+        document.querySelectorAll('.sort-icon').forEach((icon, i) => {
+            icon.textContent = (i === colIndex) ? (sortState.asc ? '↑' : '↓') : '↕️';
+        });
     }
 
+    // 导航平滑滚动
     document.querySelectorAll('nav a').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            const target = document.getElementById(targetId);
+            const target = document.getElementById(this.getAttribute('href').substring(1));
             if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
     });
 
-    window.addEventListener('scroll', () => {
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('nav a');
-        let currentId = '';
-        sections.forEach(section => {
-            const top = section.offsetTop - 100;
-            if (pageYOffset >= top) currentId = section.getAttribute('id');
+    // 滚动高亮导航（使用 IntersectionObserver 替代 scroll 事件）
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('nav a');
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                navLinks.forEach(link => {
+                    link.classList.toggle('nav-active', link.getAttribute('href') === '#' + id);
+                });
+            }
         });
-        navLinks.forEach(link => {
-            link.classList.remove('nav-active');
-            if (link.getAttribute('href') === '#' + currentId) link.classList.add('nav-active');
-        });
-    });
+    }, { rootMargin: '-20% 0px -60% 0px' });
+    sections.forEach(section => observer.observe(section));
 </script>
 </body>
 </html>
