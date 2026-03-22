@@ -2,679 +2,2057 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
-    <meta name="description" content="合肥到杭州双人周末旅行攻略，含G7612/G7646高铁时刻、西湖太子湾灵隐寺行程、杭帮菜美食推荐、费用明细">
-    <meta property="og:title" content="合肥 ⇄ 杭州 · 双人周末攻略">
-    <meta property="og:description" content="含高铁时刻、西湖太子湾灵隐寺行程、杭帮菜美食推荐、双人费用约¥1836">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>合肥→杭州 双人周末游攻略 | 西湖·灵隐·太子湾</title>
+    <meta name="description" content="合肥→杭州双人周末游完整攻略，含西湖、灵隐寺、太子湾游览路线、高铁交通、精选住宿、餐饮推荐及详细费用预算（人均约¥860，不含住宿）。">
+    <meta property="og:title" content="合肥→杭州 双人周末游攻略 | 西湖·灵隐·太子湾">
+    <meta property="og:description" content="合肥→杭州双人周末游完整攻略，西湖、灵隐寺、太子湾，人均约¥860（不含住宿）。">
     <meta property="og:type" content="article">
-    <title>合肥 ⇄ 杭州 · 双人周末（手机优化版）</title>
     <style>
+        /* ========== 全局样式 ========== */
+        :root {
+            --primary-blue: #1e5a7e;
+            --light-blue: #e8f4f8;
+            --accent-green: #2d8a6e;
+            --light-green: #e8f5ef;
+            --warm-amber: #d4a574;
+            --text-dark: #2c3e50;
+            --text-light: #5d6d7e;
+            --bg-white: #ffffff;
+            --bg-gray: #f8f9fa;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.12);
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
         }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            background-color: #e9f3f0;
-            line-height: 1.6;
-            color: #1e3a37;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            line-height: 1.8;
+            color: var(--text-dark);
+            background-color: var(--bg-gray);
         }
-        .container {
-            max-width: 1200px;
-            margin: 20px auto 30px;
-            background-color: white;
-            box-shadow: 0 20px 40px -10px rgba(0, 90, 80, 0.2);
-            border-radius: 32px 32px 24px 24px;
-            overflow: hidden;
-        }
-        nav {
-            background: white;
-            padding: 1rem 1.5rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem 1.5rem;
-            border-bottom: 2px solid #c7e9e0;
-            position: sticky;
+
+        /* ========== 导航栏 ========== */
+        .navbar {
+            position: fixed;
             top: 0;
-            z-index: 10;
-            backdrop-filter: blur(8px);
-            background-color: rgba(255,255,255,0.9);
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+            z-index: 1000;
+            padding: 0 20px;
         }
-        nav a {
-            text-decoration: none;
-            color: #1f5f5a;
-            font-weight: 500;
-            font-size: 1rem;
-            padding: 4px 0;
-            border-bottom: 2px solid transparent;
-            transition: 0.2s;
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
         }
-        nav a:hover {
-            border-bottom-color: #2e8b7e;
-            color: #0d4a44;
-        }
-        .nav-active {
-            border-bottom-color: #2e8b7e;
-            font-weight: 600;
-        }
-        section {
-            padding: 2rem 1.5rem;
-            border-bottom: 1px solid #d1eee7;
-        }
-        h2 {
-            font-size: 1.8rem;
-            color: #116466;
-            margin-bottom: 1.5rem;
+
+        .nav-logo {
             display: flex;
             align-items: center;
             gap: 10px;
-            border-left: 8px solid #5fb3a7;
-            padding-left: 16px;
-        }
-        h3 {
-            font-size: 1.2rem;
-            margin: 1.5rem 0 1rem;
-            color: #1d7a70;
-        }
-        /* 时间轴 - 移动端优化：两行时间 */
-        .timeline {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        .timeline-item {
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
-            padding: 1rem 1.2rem;
-            border-radius: 30px 12px 12px 30px;
-            border-left: 8px solid;
-            transition: 0.2s;
-        }
-        .day-sat {
-            background-color: #f0fbf9;
-            border-left-color: #2c8c7b;
-        }
-        .day-sun {
-            background-color: #fef9ec;
-            border-left-color: #b3864d;
-        }
-        /* 时间区域：两行，窄宽 */
-        .timeline-time {
-            min-width: 70px;
-            background: white;
-            border-radius: 30px;
-            padding: 6px 4px;
-            text-align: center;
-            box-shadow: 0 4px 8px #c2e3db;
+            font-size: 20px;
             font-weight: 700;
-            color: #0b4f48;
-            line-height: 1.3;
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+
+        .nav-logo svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .nav-links {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
+            gap: 8px;
+            list-style: none;
         }
-        .timeline-time .time-start {
-            font-size: 1rem;
-        }
-        .timeline-time .time-end {
-            font-size: 0.9rem;
-            color: #3f7970;
-            font-weight: 500;
-        }
-        .timeline-content {
-            flex: 1;
-            min-width: 0; /* 防止溢出 */
-        }
-        .timeline-content p {
-            margin: 4px 0;
-            word-break: break-word;
-        }
-        .badge {
-            background-color: #e1f3ef;
-            color: #075e54;
-            font-weight: 600;
-            padding: 2px 10px;
-            border-radius: 30px;
-            font-size: 0.75rem;
-            display: inline-block;
-            margin-right: 8px;
-        }
-        .transport-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            background: white;
-            border-radius: 30px;
-            padding: 3px 10px;
-            margin: 4px 6px 0 0;
-            font-size: 0.8rem;
-            border: 1px solid #9bc6bc;
-            color: #0f5a50;
-            font-weight: 500;
-        }
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        .card {
-            background: white;
-            border-radius: 24px;
-            box-shadow: 0 10px 20px #d0ebe4;
-            overflow: hidden;
-            border: 1px solid #bde0d8;
-        }
-        .img-container {
-            position: relative;
-            width: 100%;
-            height: 160px;
-            background-color: #d2eee6;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #1d7a70;
-            font-weight: 500;
-        }
-        .img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-bottom: 3px solid #9ed5cb;
-        }
-        .fallback-text {
+
+        .nav-hamburger {
             display: none;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-            background: #badfd6;
-            color: #16544a;
-            font-size: 1.2rem;
-            font-weight: 500;
-        }
-        .card-content {
-            padding: 0.8rem 1rem 1rem;
-        }
-        .card h4 {
-            font-size: 1.2rem;
-            color: #105e54;
-            margin-bottom: 6px;
-        }
-        .card p {
-            margin: 4px 0;
-            font-size: 0.9rem;
-        }
-        .collapse-btn {
             background: none;
             border: none;
-            color: #0f6b60;
-            font-weight: 600;
+            font-size: 24px;
             cursor: pointer;
-            padding: 8px 0 2px;
+            color: var(--primary-blue);
+            padding: 4px 8px;
+            border-radius: 6px;
+            transition: var(--transition);
+        }
+
+        .nav-hamburger:hover {
+            background: var(--light-blue);
+        }
+
+        .nav-links a {
+            display: block;
+            padding: 10px 18px;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary-blue);
+            background: var(--light-blue);
+        }
+
+        /* ========== 英雄区 ========== */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-green) 100%);
+            color: white;
+            padding: 140px 20px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .hero-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .hero-info-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+        }
+
+        .hero-info-item svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* ========== 主要内容区 ========== */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* ========== 通用区块样式 ========== */
+        .section {
+            background: var(--bg-white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .section-header {
+            padding: 25px 30px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-green) 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-header svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .section-header h2 {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .section-body {
+            padding: 30px;
+        }
+
+        /* ========== 概览卡片 ========== */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .overview-card {
+            background: var(--bg-gray);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            text-align: center;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .overview-card:hover {
+            border-color: var(--primary-blue);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .overview-card-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--light-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            color: var(--primary-blue);
+        }
+
+        .overview-card-icon svg {
+            width: 30px;
+            height: 30px;
+        }
+
+        .overview-card h3 {
+            font-size: 16px;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .overview-card p {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        /* ========== 交通区块 ========== */
+        .transport-card {
+            background: var(--bg-gray);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary-blue);
+        }
+
+        .transport-card:last-child {
+            margin-bottom: 0;
+            border-left-color: var(--accent-green);
+        }
+
+        .transport-card h3 {
+            font-size: 18px;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .transport-card h3 svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .train-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .train-info-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .train-info-item .label {
+            font-size: 13px;
+            color: var(--text-light);
+            background: var(--bg-white);
+            padding: 4px 10px;
+            border-radius: 4px;
+        }
+
+        .train-info-item .value {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .price-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--warm-amber), #e8b888);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .local-transport {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px dashed #ddd;
+        }
+
+        .transport-method {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: var(--bg-white);
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .transport-method-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--light-blue);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+        }
+
+        .transport-method-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .transport-method-info h4 {
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .transport-method-info p {
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        /* ========== 时间轴 ========== */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--primary-blue), var(--accent-green));
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: var(--bg-gray);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -31px;
+            top: 30px;
+            width: 14px;
+            height: 14px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--primary-blue);
+        }
+
+        .timeline-time {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            background: var(--light-blue);
+            padding: 5px 12px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .timeline-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .timeline-content {
+            color: var(--text-light);
+            font-size: 15px;
+        }
+
+        .timeline-content ul {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        .timeline-content li {
+            margin-bottom: 6px;
+        }
+
+        .day-section {
+            margin-bottom: 40px;
+        }
+
+        .day-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .day-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--primary-blue);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .day-title svg {
+            width: 24px;
+            height: 24px;
+            color: var(--primary-blue);
+        }
+
+        /* ========== 折叠区块 ========== */
+        .collapsible {
+            background: var(--bg-gray);
+            border-radius: var(--border-radius);
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .collapsible-header {
+            padding: 20px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            background: none;
+            border: none;
+            text-align: left;
+            font-family: inherit;
+            font-size: inherit;
+            color: inherit;
+        }
+
+        .collapsible-header:hover {
+            background: var(--light-blue);
+        }
+
+        .collapsible-header h3 {
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .collapsible-header h3 svg {
+            width: 22px;
+            height: 22px;
+            color: var(--primary-blue);
+        }
+
+        .collapsible-toggle {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+        }
+
+        .collapsible.active .collapsible-toggle {
+            transform: rotate(180deg);
+        }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .collapsible.active .collapsible-content {
+            max-height: 1000px;
+        }
+
+        .collapsible-body {
+            padding: 0 25px 25px;
+        }
+
+        /* ========== 美食区块 ========== */
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .food-card {
+            background: var(--bg-gray);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .food-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .food-card-image {
+            height: 180px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-green));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 50px;
+        }
+
+        .food-card-content {
+            padding: 20px;
+        }
+
+        .food-card h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .food-card .address {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
             gap: 5px;
-            font-size: 0.9rem;
         }
-        .extra-detail {
-            margin-top: 10px;
-            border-top: 1px dashed #9bc6bc;
-            padding-top: 10px;
-            font-size: 0.85rem;
-            color: #2c4e4a;
+
+        .food-card .address svg {
+            width: 14px;
+            height: 14px;
         }
-        .extra-detail.hidden {
-            display: none;
+
+        .food-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
         }
-        .table-wrapper {
-            overflow-x: auto;
-            margin: 20px 0 10px;
+
+        .food-tag {
+            font-size: 12px;
+            padding: 4px 10px;
+            background: var(--light-blue);
+            color: var(--primary-blue);
             border-radius: 20px;
-            border: 1px solid #b7dfd6;
         }
-        table {
+
+        .food-tag.price {
+            background: var(--light-green);
+            color: var(--accent-green);
+        }
+
+        .food-highlights {
+            font-size: 14px;
+            color: var(--text-dark);
+        }
+
+        .food-highlights strong {
+            color: var(--primary-blue);
+        }
+
+        /* ========== 费用表格 ========== */
+        .cost-table-wrapper {
+            overflow-x: auto;
+        }
+
+        .cost-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.9rem;
-            min-width: 500px;
+            font-size: 14px;
         }
-        th {
-            background: #1d7f74;
-            color: white;
+
+        .cost-table th,
+        .cost-table td {
+            padding: 15px 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cost-table th {
+            background: var(--light-blue);
+            color: var(--primary-blue);
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .cost-table tr:hover {
+            background: var(--bg-gray);
+        }
+
+        .cost-table .item-name {
             font-weight: 600;
-            padding: 10px 6px;
-            cursor: pointer;
-            user-select: none;
-            font-size: 0.9rem;
         }
-        th:hover {
-            background: #14685f;
+
+        .cost-table .detail {
+            color: var(--text-light);
+            font-size: 13px;
         }
-        td, th {
-            border: 1px solid #b7dfd6;
-            padding: 10px 6px;
+
+        .cost-table .price {
+            font-weight: 700;
+            color: var(--primary-blue);
         }
-        tr:nth-child(even) {
-            background-color: #f1fbf8;
+
+        .cost-table .total-row {
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-green));
+            color: white;
+            font-size: 18px;
         }
-        .total-row {
-            background: #d1eee7 !important;
+
+        .cost-table .total-row td {
+            border-bottom: none;
             font-weight: 700;
         }
-        .sort-icon {
-            margin-left: 4px;
-            font-size: 0.7rem;
+
+        .cost-table .category-cell {
+            font-weight: 700;
         }
-        .chip {
-            background: white;
-            padding: 4px 12px;
-            border-radius: 50px;
-            color: #116466;
-            font-weight: 500;
-            border: 1px solid #6fc1b6;
-            font-size: 0.8rem;
-            display: inline-block;
+
+        .cost-table .category-repeat {
+            font-weight: 400;
+            color: var(--text-light);
+            border-top: none;
         }
-        footer {
-            text-align: center;
-            padding: 1.5rem;
-            color: #3d7a72;
-            background: #ecf9f5;
-            font-size: 0.85rem;
-        }
-        /* 内联样式提取 */
-        .transport-layout {
+
+        .sort-controls {
             display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .transport-train {
-            flex: 2;
-            min-width: 240px;
-        }
-        .transport-local {
-            flex: 3;
-        }
-        .transport-list {
-            list-style-type: none;
-            columns: 2;
             gap: 10px;
-            font-size: 0.9rem;
-        }
-        .tips-layout {
-            display: flex;
+            margin-bottom: 20px;
             flex-wrap: wrap;
-            gap: 16px;
         }
-        .tips-card {
-            flex: 1;
-            min-width: 280px;
-            background: #ebf7f4;
-            border-radius: 30px;
-            padding: 20px;
+
+        .sort-btn {
+            padding: 8px 16px;
+            background: var(--bg-gray);
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: var(--transition);
         }
-        .sort-hint {
-            font-size: 0.9rem;
+
+        .sort-btn:hover,
+        .sort-btn.active {
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
         }
-        /* 平板断点 */
+
+        /* ========== 贴士区块 ========== */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .tip-card {
+            background: var(--bg-gray);
+            border-radius: var(--border-radius);
+            padding: 25px;
+        }
+
+        .tip-card h3 {
+            font-size: 17px;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tip-card h3 svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .tip-card ul {
+            padding-left: 20px;
+        }
+
+        .tip-card li {
+            margin-bottom: 10px;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .tip-card li::marker {
+            color: var(--primary-blue);
+        }
+
+        /* ========== 页脚 ========== */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 40px;
+        }
+
+        .footer p {
+            opacity: 0.8;
+            font-size: 14px;
+        }
+
+        /* ========== 响应式 ========== */
         @media (max-width: 768px) {
-            .transport-list {
-                columns: 1;
+            .hero h1 {
+                font-size: 32px;
             }
-            .tips-layout {
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .hero-info {
+                gap: 20px;
+            }
+
+            .nav-hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .nav-open .nav-links {
+                display: flex;
                 flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.98);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+                padding: 10px 20px 20px;
+                gap: 4px;
+                z-index: 999;
+            }
+
+            .section-body {
+                padding: 20px;
+            }
+
+            .timeline {
+                padding-left: 30px;
+            }
+
+            .food-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .train-info {
+                grid-template-columns: 1fr;
             }
         }
-        /* 超小屏微调 */
-        @media (max-width: 480px) {
-            .timeline-item {
-                flex-wrap: wrap;
-            }
-            .timeline-time {
-                min-width: 65px;
-                padding: 4px 2px;
-            }
-            .timeline-time .time-start { font-size: 0.95rem; }
-            .timeline-time .time-end { font-size: 0.8rem; }
-            .badge { font-size: 0.7rem; }
+
+        /* ========== 图片占位符 ========== */
+        .placeholder-img {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .placeholder-img svg {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .placeholder-img span {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* ========== 按钮样式 ========== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: var(--primary-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            background: var(--accent-green);
+            transform: translateY(-2px);
+        }
+
+        .btn svg {
+            width: 18px;
+            height: 18px;
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <nav>
-        <a href="#overview">📋 概览</a>
-        <a href="#transport">🚄 交通</a>
-        <a href="#food">🍜 美食</a>
-        <a href="#cost">💰 费用</a>
-        <a href="#tips">📌 贴士</a>
+    <!-- ========== 导航栏 ========== -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M3 17l6-6 4 4 8-8"/>
+                    <path d="M14 7h7v7"/>
+                </svg>
+                杭州周末游
+            </a>
+            <button class="nav-hamburger" aria-label="打开导航菜单">☰</button>
+            <ul class="nav-links">
+                <li><a href="#overview">行程概览</a></li>
+                <li><a href="#transport">交通</a></li>
+                <li><a href="#itinerary">行程安排</a></li>
+                <li><a href="#food">美食推荐</a></li>
+                <li><a href="#cost">费用预算</a></li>
+                <li><a href="#tips">实用贴士</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <!-- 行程概览（时间轴两行时间） -->
-    <section id="overview">
-        <h2>🌿 双人周末·时间轴 (G7612/G7646)</h2>
-        <div class="timeline">
-            <!-- 周六 去程 单点时间：结束时间显示“—”或留空，这里用“出发”作为结束标识 -->
-            <div class="timeline-item day-sat">
-                <div class="timeline-time">
-                    <span class="time-start">07:56</span>
-                    <span class="time-end">出发</span>
+    <!-- ========== 英雄区 ========== -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-badge">2026年最新攻略</span>
+            <h1>合肥 → 杭州 双人周末游</h1>
+            <p class="hero-subtitle">西湖畔·灵隐寺·太子湾 | 两天一夜深度漫游</p>
+            <div class="hero-info">
+                <div class="hero-info-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                    <span>2人出行</span>
                 </div>
-                <div class="timeline-content">
-                    <span class="badge">高铁</span><strong>G7612 合肥南→杭州东</strong> (二等座 ¥205/人)
-                    <div><span class="transport-tag">🚄 约2.5h, 10:30抵达</span></div>
+                <div class="hero-info-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="16" y1="2" x2="16" y2="6"/>
+                        <line x1="8" y1="2" x2="8" y2="6"/>
+                        <line x1="3" y1="10" x2="21" y2="10"/>
+                    </svg>
+                    <span>周六-周日</span>
                 </div>
-            </div>
-            <div class="timeline-item day-sat">
-                <div class="timeline-time">
-                    <span class="time-start">10:30</span>
-                    <span class="time-end">11:30</span>
+                <div class="hero-info-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                    <span>2天1夜</span>
                 </div>
-                <div class="timeline-content">
-                    <span class="badge">酒店入住</span> 抵达杭州东，<strong>地铁19号线/打车</strong> 至白金汉爵酒店（之江路）<br>
-                    <span class="transport-tag">🚇 地铁约40min, 8元/人</span> <span class="transport-tag">🚖 打车约25min, 35元</span>
-                    <p>📌 寄行李后轻装出发</p>
-                </div>
-            </div>
-            <div class="timeline-item day-sat">
-                <div class="timeline-time">
-                    <span class="time-start">11:30</span>
-                    <span class="time-end">13:00</span>
-                </div>
-                <div class="timeline-content">
-                    <span class="badge">午餐</span> 弄堂里(桃花湖店) 或 湛碧楼湖景餐厅 — 卤鸡爪、东坡肉<br>
-                    <span class="transport-tag">🚖 酒店→餐厅 打车约15元</span>
-                </div>
-            </div>
-            <div class="timeline-item day-sat">
-                <div class="timeline-time">
-                    <span class="time-start">13:30</span>
-                    <span class="time-end">16:00</span>
-                </div>
-                <div class="timeline-content">
-                    <span class="badge">太子湾公园</span> 郁金香/樱花季（免费但需预约）<br>
-                    <span class="transport-tag">🚖 餐厅→太子湾 打车约18元, 15min</span>
-                    <span class="transport-tag">🚌 公交4路/314路 约3元/人</span>
-                </div>
-            </div>
-            <div class="timeline-item day-sat">
-                <div class="timeline-time">
-                    <span class="time-start">16:30</span>
-                    <span class="time-end">18:30</span>
-                </div>
-                <div class="timeline-content">
-                    <span class="badge">西湖苏堤·日落</span> 漫步苏堤、花港观鱼、长桥公园拍雷峰夕照<br>
-                    <span class="transport-tag">🚶 太子湾→苏堤 步行10min</span>
-                    <span class="transport-tag">🚲 共享单车 5min</span>
-                </div>
-            </div>
-            <div class="timeline-item day-sat">
-                <div class="timeline-time">
-                    <span class="time-start">19:00</span>
-                    <span class="time-end">21:00</span>
-                </div>
-                <div class="timeline-content">
-                    <span class="badge">晚餐·河坊街</span> 方传酒菜面饭(片儿川、葱油腰花)  + 定胜糕小吃<br>
-                    <span class="transport-tag">🚖 苏堤→河坊街 打车约18元</span>
-                </div>
-            </div>
-            <!-- 周日 -->
-            <div class="timeline-item day-sun">
-                <div class="timeline-time">
-                    <span class="time-start">08:30</span>
-                    <span class="time-end">出发</span>
-                </div>
-                <div class="timeline-content">
-                    <span class="badge">灵隐寺</span> 飞来峰+灵隐香花券 ¥75/人<br>
-                    <span class="transport-tag">🚖 酒店→灵隐 打车约35元, 25min</span>
-                    <span class="transport-tag">🚌 公交7路/游2线 约3元/人</span>
-                </div>
-            </div>
-            <div class="timeline-item day-sun">
-                <div class="timeline-time">
-                    <span class="time-start">11:30</span>
-                    <span class="time-end">13:00</span>
-                </div>
-                <div class="timeline-content">
-                    <span class="badge">午餐·龙井村/素斋</span> 灵隐素喜斋 或 龙井村农家菜(春笋、龙井虾仁)<br>
-                    <span class="transport-tag">🚶 灵隐→龙井 步行/打车约15元</span>
-                </div>
-            </div>
-            <div class="timeline-item day-sun">
-                <div class="timeline-time">
-                    <span class="time-start">13:30</span>
-                    <span class="time-end">15:00</span>
-                </div>
-                <div class="timeline-content">
-                    <span class="badge">伴手礼/返程准备</span> 知味观买定胜糕、藕粉，回酒店取行李<br>
-                    <span class="transport-tag">🚖 龙井→酒店 打车约35元</span>
-                </div>
-            </div>
-            <div class="timeline-item day-sun">
-                <div class="timeline-time">
-                    <span class="time-start">17:44</span>
-                    <span class="time-end">返程</span>
-                </div>
-                <div class="timeline-content">
-                    <span class="badge">G7646 杭州东→合肥</span> 二等座 ¥208/人，预计20:14抵达<br>
-                    <span class="transport-tag">🚖 酒店→杭州东 打车约55元, 35min</span>
-                    <span class="transport-tag">🚇 地铁6号→19号线 8元/人</span>
+                <div class="hero-info-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <line x1="12" y1="1" x2="12" y2="23"/>
+                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                    </svg>
+                    <span>人均约¥860</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 交通汇总 -->
-    <section id="transport">
-        <h2>🚗 交通规划明细</h2>
-        <div class="transport-layout">
-            <div class="transport-train">
-                <h3>🚄 往返高铁</h3>
-                <p><strong>去程：</strong>G7612 (07:56-10:30) 二等座 ¥205/人</p>
-                <p><strong>返程：</strong>G7646 (17:44-20:14) 二等座 ¥208/人</p>
-                <p class="chip">购票：铁路12306</p>
+    <!-- ========== 主要内容区 ========== -->
+    <div class="main-content">
+        <!-- ========== 行程概览 ========== -->
+        <section id="overview" class="section">
+            <div class="section-header">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+                <h2>行程概览</h2>
             </div>
-            <div class="transport-local">
-                <h3>🚌 本地交通 (双人总计预估 ¥240)</h3>
-                <ul class="transport-list">
-                    <li>✅ 酒店⇄太子湾 打车 ¥25</li>
-                    <li>✅ 太子湾→苏堤 单车 ¥6</li>
-                    <li>✅ 苏堤→河坊街 打车 ¥18</li>
-                    <li>✅ 酒店⇄灵隐 打车 ¥70</li>
-                    <li>✅ 灵隐→龙井村 打车 ¥15</li>
-                    <li>✅ 龙井→酒店 打车 ¥35</li>
-                    <li>✅ 酒店→杭州东 地铁 ¥16</li>
-                    <li>✅ 备用/观光车 约 ¥30</li>
-                </ul>
+            <div class="section-body">
+                <div class="overview-grid">
+                    <div class="overview-card">
+                        <div class="overview-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                        </div>
+                        <h3>出发地点</h3>
+                        <p>合肥南站</p>
+                    </div>
+                    <div class="overview-card">
+                        <div class="overview-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2"/>
+                                <line x1="16" y1="2" x2="16" y2="6"/>
+                                <line x1="8" y1="2" x2="8" y2="6"/>
+                            </svg>
+                        </div>
+                        <h3>出行时间</h3>
+                        <p>周六上午出发</p>
+                    </div>
+                    <div class="overview-card">
+                        <div class="overview-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                                <polyline points="9 22 9 12 15 12 15 22"/>
+                            </svg>
+                        </div>
+                        <h3>住宿酒店</h3>
+                        <p>白金汉爵大酒店</p>
+                    </div>
+                    <div class="overview-card">
+                        <div class="overview-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                        </div>
+                        <h3>核心景点</h3>
+                        <p>西湖·灵隐·太子湾</p>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- 美食卡片（略缩，保留后备） -->
-    <section id="food">
-        <h2>🥢 地道杭帮菜 & 风味小吃</h2>
-        <div class="card-grid">
-            <div class="card">
-                <div class="img-container">
-                    <img loading="lazy" src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=260&fit=crop&auto=format" alt="弄堂里桃花湖店 - 卤鸡爪、刀板香蒸饭" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="fallback-text">🍖 弄堂里</div>
-                </div>
-                <div class="card-content">
-                    <h4>弄堂里·桃花湖</h4>
-                    <p>📍 启迪国际创新港107号</p>
-                    <p>🍖 卤鸡爪、刀板香蒸饭</p>
-                    <p>💰 人均80-100 | 11:00-21:00</p>
-                    <button class="collapse-btn" aria-expanded="false">📎 展开详情</button>
-                    <div class="extra-detail hidden">招牌鸡爪软烂，建议11:30前到。</div>
-                </div>
+        <!-- ========== 交通规划 ========== -->
+        <section id="transport" class="section">
+            <div class="section-header">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M5 18H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2"/>
+                    <rect x="9" y="11" width="6" height="7"/>
+                    <circle cx="6" cy="18" r="2"/>
+                    <circle cx="18" cy="18" r="2"/>
+                </svg>
+                <h2>交通规划</h2>
             </div>
-            <div class="card">
-                <div class="img-container">
-                    <img loading="lazy" src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=260&fit=crop" alt="湛碧楼湖景餐厅 - 龙井虾仁、脆皮鹅肝酱" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="fallback-text">🌊 湛碧楼</div>
+            <div class="section-body">
+                <!-- 去程 -->
+                <div class="transport-card">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                            <polyline points="12 5 19 12 12 19"/>
+                        </svg>
+                        去程 · 周六上午 · 合肥 → 杭州
+                    </h3>
+                    <div class="train-info">
+                        <div class="train-info-item">
+                            <span class="label">推荐车次</span>
+                            <span class="value">G7612（动车）</span>
+                        </div>
+                        <div class="train-info-item">
+                            <span class="label">出发站</span>
+                            <span class="value">合肥南站</span>
+                        </div>
+                        <div class="train-info-item">
+                            <span class="label">到达站</span>
+                            <span class="value">杭州东站</span>
+                        </div>
+                        <div class="train-info-item">
+                            <span class="label">出发时间</span>
+                            <span class="value">07:56</span>
+                        </div>
+                        <div class="train-info-item">
+                            <span class="label">到达时间</span>
+                            <span class="value">约10:18</span>
+                        </div>
+                        <div class="train-info-item">
+                            <span class="label">行程时长</span>
+                            <span class="value">约2小时22分钟</span>
+                        </div>
+                    </div>
+                    <p style="margin-bottom: 15px;"><span class="price-tag">二等座 ¥197/人</span></p>
+                    <p style="color: var(--text-light); font-size: 14px;">
+                        <strong>推荐理由：</strong>「G7612」07:56出发，10:18左右抵达杭州东站，出站后可直接换乘地铁1号线前往酒店，行李寄存后开始游玩，时间利用最充分。票价实惠，车程舒适。
+                    </p>
+                    <p style="color: var(--text-light); font-size: 14px; margin-top: 10px;">
+                        <strong>购票渠道：</strong>铁路12306APP / 携程APP | 建议提前3天购票，周末票源紧张
+                    </p>
                 </div>
-                <div class="card-content">
-                    <h4>湛碧楼·湖景餐厅</h4>
-                    <p>📍 杨公堤38号</p>
-                    <p>🦐 龙井虾仁、脆皮鹅肝酱</p>
-                    <p>💰 人均160 | 需预约</p>
-                    <button class="collapse-btn" aria-expanded="false">📎 展开详情</button>
-                    <div class="extra-detail hidden">虎跑泉水牛肉，观日落佳处。</div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="img-container">
-                    <img loading="lazy" src="https://images.unsplash.com/photo-1555126634-323e4e2509d9?w=400&h=260&fit=crop" alt="方传酒菜面饭 - 葱油腰花、片儿川" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="fallback-text">🍜 方传面馆</div>
-                </div>
-                <div class="card-content">
-                    <h4>方传酒菜面饭</h4>
-                    <p>📍 钱江路in盒里1号楼</p>
-                    <p>🍜 葱油腰花、片儿川</p>
-                    <p>💰 人均65 | 07:00-20:30</p>
-                    <button class="collapse-btn" aria-expanded="false">📎 展开详情</button>
-                    <div class="extra-detail hidden">腰花处理干净，近河坊街。</div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="img-container">
-                    <img loading="lazy" src="https://images.unsplash.com/photo-1601050799728-1aae7a89b0e8?w=400&h=260&fit=crop" alt="蒋顺发定胜糕 - 现做豆沙流心糕点" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="fallback-text">🌸 定胜糕</div>
-                </div>
-                <div class="card-content">
-                    <h4>蒋顺发·定胜糕</h4>
-                    <p>📍 河坊街 / 南宋御街</p>
-                    <p>🌸 定胜糕、葱包烩</p>
-                    <p>💰 小吃人均20-30</p>
-                    <button class="collapse-btn" aria-expanded="false">📎 展开详情</button>
-                    <div class="extra-detail hidden">现做豆沙流心，伴手礼佳。</div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- 费用表格 -->
-    <section id="cost">
-        <h2>💰 双人总费用参考 (2026)</h2>
-        <div class="table-wrapper">
-            <table id="cost-table">
-                <thead>
-                    <tr><th onclick="sortTable(0)">项目 <span class="sort-icon">↕️</span></th><th onclick="sortTable(1)">明细</th><th onclick="sortTable(2)">单价(人)</th><th onclick="sortTable(3)">双人总价</th><th>备注</th></tr>
-                </thead>
-                <tbody id="table-body">
-                    <tr><td>交通·去程</td><td>G7612 二等座</td><td>¥205</td><td>¥410</td><td>07:56出发</td></tr>
-                    <tr><td>交通·返程</td><td>G7646 二等座</td><td>¥208</td><td>¥416</td><td>17:44出发</td></tr>
-                    <tr><td>本地交通</td><td>打车+地铁+单车</td><td>¥120</td><td>¥240</td><td>预估</td></tr>
-                    <tr><td>门票·灵隐寺</td><td>飞来峰+香花券</td><td>¥75</td><td>¥150</td><td>提前预约</td></tr>
-                    <tr><td>其他景点</td><td>太子湾/西湖</td><td>免费</td><td>¥0</td><td>免费预约</td></tr>
-                    <tr><td>周六午餐</td><td>弄堂里/湛碧楼</td><td>¥90</td><td>¥180</td><td>东坡肉等</td></tr>
-                    <tr><td>周六晚餐</td><td>方传面馆+小吃</td><td>¥70</td><td>¥140</td><td>片儿川</td></tr>
-                    <tr><td>周日早餐</td><td>酒店/知味观</td><td>¥30</td><td>¥60</td><td>定胜糕</td></tr>
-                    <tr><td>周日午餐</td><td>龙井村/素斋</td><td>¥80</td><td>¥160</td><td>春笋</td></tr>
-                    <tr><td>其他</td><td>水+零食+伴手礼</td><td>¥40</td><td>¥80</td><td>藕粉</td></tr>
-                    <tr class="total-row"><td colspan="3"><strong>总计 (双人，不含住宿)</strong></td><td><strong>¥1836</strong></td><td>住宿另计</td></tr>
-                </tbody>
-            </table>
-        </div>
-        <p class="sort-hint">✨ 点击表头可升降序排序。</p>
-    </section>
+                <!-- 返程 -->
+                <div class="transport-card">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="19" y1="12" x2="5" y2="12"/>
+                            <polyline points="12 5 5 12 12 19"/>
+                        </svg>
+                        返程 · 周日下午 · 杭州 → 合肥
+                    </h3>
+                    <div class="train-info">
+                        <div class="train-info-item">
+                            <span class="label">推荐车次</span>
+                            <span class="value">G7646（动车）</span>
+                        </div>
+                        <div class="train-info-item">
+                            <span class="label">出发站</span>
+                            <span class="value">杭州东站</span>
+                        </div>
+                        <div class="train-info-item">
+                            <span class="label">到达站</span>
+                            <span class="value">合肥南站</span>
+                        </div>
+                        <div class="train-info-item">
+                            <span class="label">出发时间</span>
+                            <span class="value">17:44</span>
+                        </div>
+                        <div class="train-info-item">
+                            <span class="label">到达时间</span>
+                            <span class="value">约20:06</span>
+                        </div>
+                        <div class="train-info-item">
+                            <span class="label">行程时长</span>
+                            <span class="value">约2小时22分钟</span>
+                        </div>
+                    </div>
+                    <p style="margin-bottom: 15px;"><span class="price-tag">二等座 ¥197/人</span></p>
+                    <p style="color: var(--text-light); font-size: 14px;">
+                        <strong>推荐理由：</strong>「G7646」17:44出发，20:06左右抵达合肥南站，既能保证上午灵隐寺游览时间充足（可游玩至12:00-13:00），下午还能悠闲购物、享用午餐，傍晚直接前往车站返程。
+                    </p>
+                </div>
 
-    <!-- 贴士 -->
-    <section id="tips">
-        <h2>📌 游玩贴士 · 季节提醒</h2>
-        <div class=”tips-layout”>
-            <div class=”tips-card”>
-                <h4>🌸 太子湾·预约</h4>
-                <p>3-4月郁金香展需通过”西湖旅游”提前3天预约。</p>
-                <h4>📿 灵隐寺上香</h4>
-                <p>进门赠三支清香；早晨7:30前到避开人流。</p>
+                <!-- 杭州本地交通 -->
+                <div class="local-transport">
+                    <h3 style="font-size: 18px; color: var(--text-dark); margin-bottom: 20px;">
+                        <svg style="width: 24px; height: 24px; vertical-align: middle; margin-right: 8px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 2v10l4 4"/>
+                        </svg>
+                        杭州本地交通（酒店→景点）
+                    </h3>
+
+                    <p style="color: var(--text-light); font-size: 14px; margin-bottom: 15px;">
+                        <strong>酒店位置：</strong>杭州白金汉爵大酒店位于西湖区珊瑚沙东路9号（之江旅游度假区），距西湖景区约15-20分钟车程。
+                    </p>
+
+                    <div class="transport-method">
+                        <div class="transport-method-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                <path d="M3 9h18M9 21V9"/>
+                            </svg>
+                        </div>
+                        <div class="transport-method-info">
+                            <h4>地铁 + 公交（推荐）</h4>
+                            <p>地铁1号线→龙翔桥站→公交直达西湖 | 费用约¥5-8/人 | 约40-50分钟</p>
+                        </div>
+                    </div>
+
+                    <div class="transport-method">
+                        <div class="transport-method-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9L18 10l-3-5H9L6 10l-2.5 1.1C2.7 11.3 2 12.1 2 13v3c0 .6.4 1 1 1h2"/>
+                                <circle cx="7" cy="17" r="2"/>
+                                <circle cx="17" cy="17" r="2"/>
+                            </svg>
+                        </div>
+                        <div class="transport-method-info">
+                            <h4>打车/网约车</h4>
+                            <p>酒店至西湖约¥35-45 | 至灵隐寺约¥40-50 | 建议使用高德/滴滴</p>
+                        </div>
+                    </div>
+
+                    <div class="transport-method">
+                        <div class="transport-method-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 6v6l4 2"/>
+                            </svg>
+                        </div>
+                        <div class="transport-method-info">
+                            <h4>共享单车</h4>
+                            <p>景区周边覆盖哈啰/美团单车 | ¥1.5-3/次 | 适合短途接驳</p>
+                        </div>
+                    </div>
+
+                    <div class="transport-method">
+                        <div class="transport-method-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M8 6v6l-4 6h16l-4-6V6"/>
+                                <path d="M12 12v6"/>
+                            </svg>
+                        </div>
+                        <div class="transport-method-info">
+                            <h4>景区观光车</h4>
+                            <p>灵隐寺景区内观光车 ¥10/人 | 连接各景点间摆渡</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class=”tips-card”>
-                <h4>📸 西湖拍照</h4>
-                <p>长桥公园(雷峰夕照)、苏堤北段人少景美。</p>
-                <h4>🚇 交通·支付</h4>
-                <p>支付宝搜“杭州地铁/公交”扫码；酒店免费寄存。</p>
+        </section>
+
+        <!-- ========== 行程安排 ========== -->
+        <section id="itinerary" class="section">
+            <div class="section-header">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                    <line x1="16" y1="13" x2="8" y2="13"/>
+                    <line x1="16" y1="17" x2="8" y2="17"/>
+                </svg>
+                <h2>详细行程安排</h2>
             </div>
-        </div>
-    </section>
-    <footer>
-        ⚡ 杭州双人周末 · 车次G7612/G7646 · 手机适配版
+            <div class="section-body">
+                <!-- 周六 -->
+                <div class="day-section">
+                    <h3 class="day-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/>
+                            <line x1="8" y1="2" x2="8" y2="6"/>
+                        </svg>
+                        周六 · 抵达与初识西湖
+                    </h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <span class="timeline-time">07:56 - 10:30</span>
+                            <h4 class="timeline-title">🚄 高铁抵达杭州</h4>
+                            <div class="timeline-content">
+                                <p>G7612次列车从合肥南站出发，约10:18抵达杭州东站</p>
+                                <ul>
+                                    <li>出站后往地铁方向，步行约5分钟至地铁站</li>
+                                    <li>换乘地铁1号线（往湘湖方向）至龙翔桥站</li>
+                                    <li>或打车前往酒店寄存行李（约¥45）</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-time">10:30 - 11:30</span>
+                            <h4 class="timeline-title">🏨 前往酒店寄存行李</h4>
+                            <div class="timeline-content">
+                                <p>入住杭州白金汉爵大酒店（西湖区珊瑚沙东路9号）</p>
+                                <ul>
+                                    <li>酒店距杭州东站约18公里，打车约¥50</li>
+                                    <li>或乘坐地铁1号线转4号线至水澄桥站，再打车</li>
+                                    <li>到达后先办理入住，将大件行李寄存在前台</li>
+                                    <li>酒店提供免费停车，自驾游客可直接停车</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-time">11:30 - 13:00</span>
+                            <h4 class="timeline-title">🍜 午餐 · 品尝杭帮菜</h4>
+                            <div class="timeline-content">
+                                <p>前往龙翔桥/湖滨商圈觅食，推荐以下选择：</p>
+                                <ul>
+                                    <li><strong>外婆烧（东坡路店）</strong> - 地道杭帮菜，人均约¥80</li>
+                                    <li><strong>绿茶餐厅（龙井路店）</strong> - 性价比高，人均约¥70</li>
+                                    <li><strong>知味观（仁和路店）</strong> - 百年老字号，人均约¥90</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-time">13:30 - 17:30</span>
+                            <h4 class="timeline-title">🌸 下午 · 西湖 + 太子湾公园</h4>
+                            <div class="timeline-content">
+                                <p>西湖漫步，邂逅太子湾春日花海</p>
+                                <ul>
+                                    <li><strong>13:30</strong> 从龙翔桥出发，步行至断桥（约15分钟）</li>
+                                    <li><strong>14:00</strong> 沿白堤漫步至孤山，赏西湖风光</li>
+                                    <li><strong>15:00</strong> 前往太子湾公园（公交约20分钟）</li>
+                                    <li><strong>15:30-17:00</strong> 太子湾赏花拍照，3-4月为郁金香、樱花盛开季</li>
+                                    <li><strong>17:00</strong> 从太子湾步行至苏堤，观赏西湖日落</li>
+                                </ul>
+                                <p style="color: var(--primary-blue); margin-top: 10px;">
+                                    <strong>门票：</strong>西湖免费 | 太子湾免费（花展期需预约）
+                                </p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-time">18:00 - 20:30</span>
+                            <h4 class="timeline-title">🌙 晚上 · 湖滨商圈 + 晚餐</h4>
+                            <div class="timeline-content">
+                                <p>湖滨步行街休闲漫步，品尝杭州美食</p>
+                                <ul>
+                                    <li><strong>晚餐推荐：</strong></li>
+                                    <li>• <strong>楼外楼（孤山路店）</strong> - 西湖醋鱼发源地，人均约¥155</li>
+                                    <li>• <strong>西隆春蟹面庄</strong> - 湖滨48号，人均约¥120</li>
+                                    <li><strong>餐后可步行至湖滨音乐喷泉（19:30/20:00场次）</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-time">21:00 -</span>
+                            <h4 class="timeline-title">🏨 返回酒店休息</h4>
+                            <div class="timeline-content">
+                                <p>返回白金汉爵大酒店，好好休息迎接第二天</p>
+                                <ul>
+                                    <li>酒店位于之江度假区，环境安静</li>
+                                    <li>房间设施豪华，可消除旅途疲劳</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 周日 -->
+                <div class="day-section">
+                    <h3 class="day-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/>
+                            <line x1="8" y1="2" x2="8" y2="6"/>
+                        </svg>
+                        周日 · 灵隐祈福与返程
+                    </h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <span class="timeline-time">07:30 - 08:30</span>
+                            <h4 class="timeline-title">🍳 酒店早餐</h4>
+                            <div class="timeline-content">
+                                <p>白金汉爵大酒店早餐（已含住宿）</p>
+                                <ul>
+                                    <li>酒店自助早餐丰富，中西结合</li>
+                                    <li>吃饱喝足，为登山祈福储备能量</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-time">08:30 - 09:00</span>
+                            <h4 class="timeline-title">🚗 前往灵隐寺</h4>
+                            <div class="timeline-content">
+                                <p>从酒店出发前往灵隐寺</p>
+                                <ul>
+                                    <li>打车约¥40-50，约30分钟</li>
+                                    <li>或乘坐公交318路/7路至灵隐站</li>
+                                    <li><strong>重要：</strong>需提前在"杭州灵隐飞来峰"小程序预约门票（免费）</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-time">09:00 - 12:00</span>
+                            <h4 class="timeline-title">🛕 上午 · 灵隐寺深度游览</h4>
+                            <div class="timeline-content">
+                                <p>千年古刹，祈福静心</p>
+                                <ul>
+                                    <li><strong>09:00-09:30</strong> 游览飞来峰，欣赏摩崖石刻</li>
+                                    <li><strong>09:30-10:30</strong> 进入灵隐寺，参拜天王殿、大雄宝殿、药师殿</li>
+                                    <li><strong>10:30-11:30</strong> 登永福寺，探访"钱塘第一福地"</li>
+                                    <li><strong>11:30-12:00</strong> 在灵隐寺十方苑品尝素面（¥20/碗）</li>
+                                </ul>
+                                <p style="color: var(--primary-blue); margin-top: 10px;">
+                                    <strong>门票：</strong>飞来峰¥45 + 灵隐寺¥30 = ¥75/人（2026年政策可能有调整，请以官方为准）
+                                </p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-time">12:00 - 13:30</span>
+                            <h4 class="timeline-title">🍽️ 午餐 · 灵隐周边美食</h4>
+                            <div class="timeline-content">
+                                <p>灵隐寺周边素食与杭帮菜选择</p>
+                                <ul>
+                                    <li><strong>庆春朴门</strong> - 网红素食餐厅，人均约¥114，白乐桥181号</li>
+                                    <li><strong>知竹</strong> - 手工素面馆，人均约¥64，天竺路69号</li>
+                                    <li><strong>大隐清心素食</strong> - 自助餐厅，人均约¥30</li>
+                                    <li><strong>绿茶餐厅（灵隐路店）</strong> - 连锁杭帮菜，人均约¥99</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-time">13:30 - 14:30</span>
+                            <h4 class="timeline-title">🎁 下午 · 伴手礼 + 收尾</h4>
+                            <div class="timeline-content">
+                                <p>返程前的准备</p>
+                                <ul>
+                                    <li><strong>购买伴手礼：</strong></li>
+                                    <li>• <strong>知味观</strong> - 定胜糕、条头糕</li>
+                                    <li>• <strong>南宋胡记</strong> - 桂花糕、核桃酥</li>
+                                    <li>• <strong>灵隐寺</strong> - 开光佛珠、香烛（按需）</li>
+                                    <li><strong>小众打卡：</strong>可前往中国美术学院（象山校区）或浙江音乐学院</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-time">16:30 - 17:00</span>
+                            <h4 class="timeline-title">🚄 前往杭州东站</h4>
+                            <div class="timeline-content">
+                                <p>返程回家</p>
+                                <ul>
+                                    <li>打车约30-40分钟至杭州东站</li>
+                                    <li>或乘坐地铁/公交提前出发</li>
+                                    <li>建议提前40分钟到达车站</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-time">17:44 - 20:06</span>
+                            <h4 class="timeline-title">🏠 高铁返程合肥</h4>
+                            <div class="timeline-content">
+                                <p>G7646次列车返回合肥南站</p>
+                                <ul>
+                                    <li>车程约2小时22分钟</li>
+                                    <li>20:06左右抵达合肥，结束完美周末</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== 美食推荐 ========== -->
+        <section id="food" class="section">
+            <div class="section-header">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
+                    <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+                    <line x1="6" y1="1" x2="6" y2="4"/>
+                    <line x1="10" y1="1" x2="10" y2="4"/>
+                    <line x1="14" y1="1" x2="14" y2="4"/>
+                </svg>
+                <h2>美食推荐</h2>
+            </div>
+            <div class="section-body">
+                <div class="collapsible active">
+                    <button class="collapsible-header" aria-expanded="true">
+                        <h3>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <path d="M3 2l2 18h14l2-18"/>
+                                <path d="M5 2h14"/>
+                            </svg>
+                            杭帮菜餐厅推荐
+                        </h3>
+                        <div class="collapsible-toggle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                        </div>
+                    </button>
+                    <div class="collapsible-content">
+                        <div class="collapsible-body">
+                            <div class="food-grid">
+                                <div class="food-card">
+                                    <div class="food-card-image">
+                                        <div class="placeholder-img">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                                <path d="M2 17l10 5 10-5"/>
+                                                <path d="M2 12l10 5 10-5"/>
+                                            </svg>
+                                            <span>楼外楼</span>
+                                        </div>
+                                    </div>
+                                    <div class="food-card-content">
+                                        <h3>楼外楼（孤山路店）</h3>
+                                        <p class="address">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                                <circle cx="12" cy="10" r="3"/>
+                                            </svg>
+                                            西湖区孤山路30号（西泠桥旁）
+                                        </p>
+                                        <div class="food-tags">
+                                            <span class="food-tag">人均¥155</span>
+                                            <span class="food-tag">百年老店</span>
+                                            <span class="food-tag price">必吃榜</span>
+                                        </div>
+                                        <p class="food-highlights">
+                                            <strong>推荐菜品：</strong>西湖醋鱼¥98、叫化童鸡¥68、东坡焖肉¥58、龙井虾仁¥78、宋嫂鱼羹¥48
+                                        </p>
+                                        <p style="color: var(--text-light); font-size: 13px; margin-top: 10px;">
+                                            <strong>营业：</strong>10:30-14:30 / 16:30-20:30 | 建议提前订座
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="food-card">
+                                    <div class="food-card-image">
+                                        <div class="placeholder-img">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                                <circle cx="12" cy="12" r="10"/>
+                                                <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                                                <line x1="9" y1="9" x2="9.01" y2="9"/>
+                                                <line x1="15" y1="9" x2="15.01" y2="9"/>
+                                            </svg>
+                                            <span>外婆烧</span>
+                                        </div>
+                                    </div>
+                                    <div class="food-card-content">
+                                        <h3>外婆烧（西湖店）</h3>
+                                        <p class="address">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                                <circle cx="12" cy="10" r="3"/>
+                                            </svg>
+                                            上城区东坡路50号（湖滨银泰旁）
+                                        </p>
+                                        <div class="food-tags">
+                                            <span class="food-tag">人均¥80</span>
+                                            <span class="food-tag">本地人常去</span>
+                                        </div>
+                                        <p class="food-highlights">
+                                            <strong>推荐菜品：</strong>西湖醋鱼¥58（半份）、糖醋里脊¥38、外婆红烧肉¥42、熏鱼¥28
+                                        </p>
+                                        <p style="color: var(--text-light); font-size: 13px; margin-top: 10px;">
+                                            <strong>营业：</strong>11:00-21:00 | 周末需等位约30分钟
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="food-card">
+                                    <div class="food-card-image">
+                                        <div class="placeholder-img">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                                <path d="M3 9h18"/>
+                                                <path d="M9 21V9"/>
+                                            </svg>
+                                            <span>绿茶餐厅</span>
+                                        </div>
+                                    </div>
+                                    <div class="food-card-content">
+                                        <h3>绿茶餐厅（龙井路店）</h3>
+                                        <p class="address">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                                <circle cx="12" cy="10" r="3"/>
+                                            </svg>
+                                            西湖区龙井路18号（茶叶博物馆旁）
+                                        </p>
+                                        <div class="food-tags">
+                                            <span class="food-tag">人均¥70</span>
+                                            <span class="food-tag">环境优雅</span>
+                                            <span class="food-tag">性价比高</span>
+                                        </div>
+                                        <p class="food-highlights">
+                                            <strong>推荐菜品：</strong>绿茶烤鱼¥58、面包诱惑¥28、东坡肉¥36、粉丝虾煲¥42
+                                        </p>
+                                        <p style="color: var(--text-light); font-size: 13px; margin-top: 10px;">
+                                            <strong>营业：</strong>10:30-21:30 | 景区店人较少，可避开高峰
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="collapsible">
+                    <button class="collapsible-header" aria-expanded="false">
+                        <h3>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <path d="M12 20V10"/>
+                                <path d="M18 20V4"/>
+                                <path d="M6 20v-4"/>
+                            </svg>
+                            特色小吃推荐
+                        </h3>
+                        <div class="collapsible-toggle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                        </div>
+                    </button>
+                    <div class="collapsible-content">
+                        <div class="collapsible-body">
+                            <div class="food-grid">
+                                <div class="food-card">
+                                    <div class="food-card-image" style="background: linear-gradient(135deg, var(--accent-green), #5ab88f);">
+                                        <div class="placeholder-img">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                                <circle cx="12" cy="12" r="10"/>
+                                            </svg>
+                                            <span>知味观</span>
+                                        </div>
+                                    </div>
+                                    <div class="food-card-content">
+                                        <h3>知味观（仁和路店）</h3>
+                                        <p class="address">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                                <circle cx="12" cy="10" r="3"/>
+                                            </svg>
+                                            上城区仁和路88号
+                                        </p>
+                                        <div class="food-tags">
+                                            <span class="food-tag">人均¥25</span>
+                                            <span class="food-tag">1913年创立</span>
+                                        </div>
+                                        <p class="food-highlights">
+                                            <strong>推荐：</strong>小笼包¥22、鲜肉馄饨¥18、条头糕¥12、定胜糕¥8（可外带伴手礼）
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="food-card">
+                                    <div class="food-card-image" style="background: linear-gradient(135deg, var(--warm-amber), #e8b888);">
+                                        <div class="placeholder-img">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                            </svg>
+                                            <span>胜利河</span>
+                                        </div>
+                                    </div>
+                                    <div class="food-card-content">
+                                        <h3>河坊街·胜利河美食街</h3>
+                                        <p class="address">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                                <circle cx="12" cy="10" r="3"/>
+                                            </svg>
+                                            上城区河坊街步行街
+                                        </p>
+                                        <div class="food-tags">
+                                            <span class="food-tag">多样小吃</span>
+                                            <span class="food-tag">夜市</span>
+                                        </div>
+                                        <p class="food-highlights">
+                                            <strong>推荐：</strong>葱包烩¥5、片儿川¥15、臭豆腐¥10、塘栖枇杷¥20
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="collapsible">
+                    <button class="collapsible-header" aria-expanded="false">
+                        <h3>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
+                                <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+                            </svg>
+                            灵隐寺周边美食
+                        </h3>
+                        <div class="collapsible-toggle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                        </div>
+                    </button>
+                    <div class="collapsible-content">
+                        <div class="collapsible-body">
+                            <div class="food-grid">
+                                <div class="food-card">
+                                    <div class="food-card-image" style="background: linear-gradient(135deg, #8e7cc3, #6b5b95);">
+                                        <div class="placeholder-img">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                            </svg>
+                                            <span>十方苑</span>
+                                        </div>
+                                    </div>
+                                    <div class="food-card-content">
+                                        <h3>灵隐寺·十方苑</h3>
+                                        <p class="address">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                                <circle cx="12" cy="10" r="3"/>
+                                            </svg>
+                                            灵隐寺内
+                                        </p>
+                                        <div class="food-tags">
+                                            <span class="food-tag">人均¥20</span>
+                                            <span class="food-tag">素面</span>
+                                            <span class="food-tag price">寺内</span>
+                                        </div>
+                                        <p class="food-highlights">
+                                            <strong>推荐：</strong>长生面¥20、长寿面¥20、素烧鹅¥15
+                                        </p>
+                                        <p style="color: var(--text-light); font-size: 13px; margin-top: 10px;">
+                                            <strong>营业：</strong>08:30-16:30 | 人多需排队
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="food-card">
+                                    <div class="food-card-image" style="background: linear-gradient(135deg, #27ae60, #2ecc71);">
+                                        <div class="placeholder-img">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                            </svg>
+                                            <span>庆春朴门</span>
+                                        </div>
+                                    </div>
+                                    <div class="food-card-content">
+                                        <h3>庆春朴门</h3>
+                                        <p class="address">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                                <circle cx="12" cy="10" r="3"/>
+                                            </svg>
+                                            灵隐支路白乐桥181号
+                                        </p>
+                                        <div class="food-tags">
+                                            <span class="food-tag">人均¥114</span>
+                                            <span class="food-tag">网红素食</span>
+                                            <span class="food-tag price">必吃榜</span>
+                                        </div>
+                                        <p class="food-highlights">
+                                            <strong>推荐：</strong>黑松露炒饭¥48、桂花荔浦芋头¥32、藜麦椒麻豆腐¥28
+                                        </p>
+                                        <p style="color: var(--text-light); font-size: 13px; margin-top: 10px;">
+                                            <strong>营业：</strong>11:00-21:00 | 环境超美，适合拍照
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="food-card">
+                                    <div class="food-card-image" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
+                                        <div class="placeholder-img">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                                <circle cx="12" cy="12" r="10"/>
+                                            </svg>
+                                            <span>知竹</span>
+                                        </div>
+                                    </div>
+                                    <div class="food-card-content">
+                                        <h3>知竹</h3>
+                                        <p class="address">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                                <circle cx="12" cy="10" r="3"/>
+                                            </svg>
+                                            天竺路69号
+                                        </p>
+                                        <div class="food-tags">
+                                            <span class="food-tag">人均¥64</span>
+                                            <span class="food-tag">素面馆</span>
+                                        </div>
+                                        <p class="food-highlights">
+                                            <strong>推荐：</strong>知味拌面¥38、牛肝菌手擀面¥48、素饺¥32
+                                        </p>
+                                        <p style="color: var(--text-light); font-size: 13px; margin-top: 10px;">
+                                            <strong>营业：</strong>07:00-20:00 | 经常排队，建议早去
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== 费用预算 ========== -->
+        <section id="cost" class="section">
+            <div class="section-header">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <line x1="12" y1="1" x2="12" y2="23"/>
+                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                </svg>
+                <h2>费用预算</h2>
+            </div>
+            <div class="section-body">
+                <div class="sort-controls">
+                    <button class="sort-btn active" data-sort="default">默认顺序</button>
+                    <button class="sort-btn" data-sort="price-asc">费用从低到高</button>
+                    <button class="sort-btn" data-sort="price-desc">费用从高到低</button>
+                </div>
+                <div class="cost-table-wrapper">
+                    <table class="cost-table" id="costTable">
+                        <thead>
+                            <tr>
+                                <th>类别</th>
+                                <th>明细项目</th>
+                                <th>单价/人</th>
+                                <th>双人总价</th>
+                                <th>备注</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-category="transport">
+                                <td class="category-cell"><strong>交通</strong></td>
+                                <td class="item-name">合肥南→杭州东（动车二等座）</td>
+                                <td class="price">¥197</td>
+                                <td class="price">¥394</td>
+                                <td class="detail">G7612次，约2h22min</td>
+                            </tr>
+                            <tr data-category="transport">
+                                <td class="category-repeat">交通</td>
+                                <td class="item-name">杭州东→合肥南（动车二等座）</td>
+                                <td class="price">¥197</td>
+                                <td class="price">¥394</td>
+                                <td class="detail">G7646次，约2h22min</td>
+                            </tr>
+                            <tr data-category="transport">
+                                <td class="category-repeat">交通</td>
+                                <td class="item-name">杭州本地交通</td>
+                                <td class="price">¥80</td>
+                                <td class="price">¥160</td>
+                                <td class="detail">地铁+公交+打车/两天</td>
+                            </tr>
+                            <tr data-category="ticket">
+                                <td class="category-cell"><strong>门票</strong></td>
+                                <td class="item-name">灵隐寺+飞来峰</td>
+                                <td class="price">¥75</td>
+                                <td class="price">¥150</td>
+                                <td class="detail">2026年政策可能有调整</td>
+                            </tr>
+                            <tr data-category="ticket">
+                                <td class="category-repeat">门票</td>
+                                <td class="item-name">西湖/太子湾</td>
+                                <td class="price">¥0</td>
+                                <td class="price">¥0</td>
+                                <td class="detail">免费景点（花展期需预约）</td>
+                            </tr>
+                            <tr data-category="food">
+                                <td class="category-cell"><strong>餐饮</strong></td>
+                                <td class="item-name">周六午餐</td>
+                                <td class="price">¥80</td>
+                                <td class="price">¥160</td>
+                                <td class="detail">外婆烧/绿茶等杭帮菜</td>
+                            </tr>
+                            <tr data-category="food">
+                                <td class="category-repeat">餐饮</td>
+                                <td class="item-name">周六晚餐</td>
+                                <td class="price">¥120</td>
+                                <td class="price">¥240</td>
+                                <td class="detail">楼外楼/西隆春等</td>
+                            </tr>
+                            <tr data-category="food">
+                                <td class="category-repeat">餐饮</td>
+                                <td class="item-name">周日早餐</td>
+                                <td class="price">¥0</td>
+                                <td class="price">¥0</td>
+                                <td class="detail">酒店含早</td>
+                            </tr>
+                            <tr data-category="food">
+                                <td class="category-repeat">餐饮</td>
+                                <td class="item-name">周日午餐</td>
+                                <td class="price">¥80</td>
+                                <td class="price">¥160</td>
+                                <td class="detail">灵隐周边素食餐厅</td>
+                            </tr>
+                            <tr data-category="other">
+                                <td class="category-cell"><strong>其他</strong></td>
+                                <td class="item-name">饮用水/小零食</td>
+                                <td class="price">¥30</td>
+                                <td class="price">¥60</td>
+                                <td class="detail">景区物价较高</td>
+                            </tr>
+                            <tr data-category="other">
+                                <td class="category-repeat">其他</td>
+                                <td class="item-name">伴手礼（预估）</td>
+                                <td class="price">¥50</td>
+                                <td class="price">¥100</td>
+                                <td class="detail">知味观糕点等</td>
+                            </tr>
+                            <tr class="total-row">
+                                <td colspan="2"><strong>总计</strong></td>
+                                <td><strong>约¥860</strong></td>
+                                <td><strong>¥1,718</strong></td>
+                                <td><strong>人均约¥850-870</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="margin-top: 20px; color: var(--text-light); font-size: 14px;">
+                    <strong>说明：</strong>以上费用为双人周末游的预估总费用，不含住宿（已预定白金汉爵大酒店）。实际费用可能因个人消费习惯、季节、票务政策等因素有所浮动。
+                </p>
+            </div>
+        </section>
+
+        <!-- ========== 实用贴士 ========== -->
+        <section id="tips" class="section">
+            <div class="section-header">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="16" x2="12" y2="12"/>
+                    <line x1="12" y1="8" x2="12.01" y2="8"/>
+                </svg>
+                <h2>实用贴士</h2>
+            </div>
+            <div class="section-body">
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <h3>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                            </svg>
+                            景点游览贴士
+                        </h3>
+                        <ul>
+                            <li><strong>灵隐寺预约：</strong>必须提前在"杭州灵隐飞来峰"小程序实名预约，上午场7:30-12:00入场，最晚13:00入园</li>
+                            <li><strong>太子湾最佳时间：</strong>3月中下旬至5月初为郁金香、樱花盛开期，花展期间需提前一天预约</li>
+                            <li><strong>西湖拍照点：</strong>断桥残雪、白堤、苏堤、孤山路沿线、花港观鱼都是经典取景地</li>
+                            <li><strong>灵隐寺上香：</strong>寺内禁止自带香烛，入口处有免费三炷香领取处，请保持安静</li>
+                            <li><strong>周末人流量：</strong>建议早起游览，避开10:00-14:00高峰时段</li>
+                        </ul>
+                    </div>
+                    <div class="tip-card">
+                        <h3>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                <path d="M3 9h18"/>
+                                <path d="M9 21V9"/>
+                            </svg>
+                            交通出行贴士
+                        </h3>
+                        <ul>
+                            <li><strong>地铁乘车：</strong>杭州地铁支持支付宝/微信直接刷码乘车，无需购买单程票</li>
+                            <li><strong>西湖景区限行：</strong>周末及节假日西湖景区实行单双号限行，建议公共交通出行</li>
+                            <li><strong>网约车：</strong>高德地图、滴滴出行都支持，注意高峰时段可能等待较长</li>
+                            <li><strong>共享单车：</strong>哈啰、美团单车站点覆盖广，景区周边有专用停车点</li>
+                            <li><strong>行李寄存：</strong>合肥南站、杭州东站都有行李寄存服务，酒店也可寄存</li>
+                        </ul>
+                    </div>
+                    <div class="tip-card">
+                        <h3>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                            美食体验贴士
+                        </h3>
+                        <ul>
+                            <li><strong>西湖醋鱼：</strong>正宗做法用鲈鱼，醋香酸甜，建议尝试前了解口味特点</li>
+                            <li><strong>排队攻略：</strong>楼外楼、外婆烧等热门餐厅可提前电话预约，或错开饭点</li>
+                            <li><strong>素食体验：</strong>灵隐寺周边素食餐厅众多，庆春朴门环境优美适合拍照</li>
+                            <li><strong>伴手礼：</strong>知味观、定胜糕、南宋胡记糕点都适合带走，送礼自用两相宜</li>
+                            <li><strong>茶饮推荐：</strong>可前往龙井村品茶，或在灵隐寺旁购买"求必应茶"</li>
+                        </ul>
+                    </div>
+                    <div class="tip-card">
+                        <h3>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 6v6l4 2"/>
+                            </svg>
+                            其他注意事项
+                        </h3>
+                        <ul>
+                            <li><strong>天气准备：</strong>提前查看杭州周末天气预报，备好雨具或防晒用品</li>
+                            <li><strong>穿着建议：</strong>景区步行较多，建议穿舒适的运动鞋，春季注意早晚温差</li>
+                            <li><strong>充电宝：</strong>游玩时间较长，随身携带充电宝，保持手机有电</li>
+                            <li><strong>现金：</strong>部分寺庙购香、小吃店可能只收现金，建议备少量现金</li>
+                            <li><strong>酒店退房：</strong>周日退房后可直接前往灵隐寺，酒店可保留一间房放行李</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ========== 页脚 ========== -->
+    <footer class="footer">
+        <p>合肥→杭州 双人周末游攻略 | 西湖·灵隐寺·太子湾</p>
+        <p style="margin-top: 10px;">本攻略仅供参考，实际行程请根据个人偏好和实际情况调整</p>
+        <p style="margin-top: 5px;">祝您旅途愉快！</p>
     </footer>
-</div>
 
-<script>
-    // 事件委托：展开/收起详情
-    document.addEventListener('click', function(e) {
-        const btn = e.target.closest('.collapse-btn');
-        if (!btn) return;
-        const extra = btn.nextElementSibling;
-        const isHidden = extra.classList.contains('hidden');
-        extra.classList.toggle('hidden');
-        btn.setAttribute('aria-expanded', isHidden);
-        btn.textContent = isHidden ? '📌 收起详情' : '📎 展开详情';
-    });
+    <!-- ========== JavaScript ========== -->
+    <script>
+        // 折叠功能（动态 max-height，aria-expanded 同步）
+        document.querySelectorAll('.collapsible-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const collapsible = header.parentElement;
+                const content = collapsible.querySelector('.collapsible-content');
+                const isActive = collapsible.classList.contains('active');
 
-    // 表格排序：支持升降序切换，跳过总计行
-    let sortState = { col: -1, asc: true };
-    function sortTable(colIndex) {
-        const tbody = document.getElementById("table-body");
-        // 切换排序方向
-        if (sortState.col === colIndex) {
-            sortState.asc = !sortState.asc;
-        } else {
-            sortState.col = colIndex;
-            sortState.asc = true;
+                if (isActive) {
+                    // 收起：先设置当前高度，再归零
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    requestAnimationFrame(() => {
+                        content.style.maxHeight = '0';
+                    });
+                    collapsible.classList.remove('active');
+                    header.setAttribute('aria-expanded', 'false');
+                } else {
+                    // 展开：设置实际高度，动画结束后设为 none
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    collapsible.classList.add('active');
+                    header.setAttribute('aria-expanded', 'true');
+                    content.addEventListener('transitionend', function onEnd() {
+                        if (collapsible.classList.contains('active')) {
+                            content.style.maxHeight = 'none';
+                        }
+                        content.removeEventListener('transitionend', onEnd);
+                    });
+                }
+            });
+        });
+
+        // 汉堡菜单
+        const hamburger = document.querySelector('.nav-hamburger');
+        const navContainer = document.querySelector('.nav-container');
+        if (hamburger) {
+            hamburger.addEventListener('click', () => {
+                navContainer.classList.toggle('nav-open');
+                hamburger.textContent = navContainer.classList.contains('nav-open') ? '✕' : '☰';
+            });
+            // 点击导航链接后关闭菜单
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navContainer.classList.remove('nav-open');
+                    hamburger.textContent = '☰';
+                });
+            });
         }
-        const dir = sortState.asc ? 1 : -1;
-        // 过滤掉总计行再排序
-        const rows = Array.from(tbody.rows).filter(r => !r.classList.contains('total-row'));
-        const totalRow = Array.from(tbody.rows).find(r => r.classList.contains('total-row'));
-        rows.sort((a, b) => {
-            let aText = a.cells[colIndex]?.innerText.replace(/[¥,]/g, '').trim();
-            let bText = b.cells[colIndex]?.innerText.replace(/[¥,]/g, '').trim();
-            if (colIndex === 0 || colIndex === 1 || colIndex === 4) {
-                return dir * aText.localeCompare(bText, 'zh');
+
+        // 费用表格排序（通过 data-sort 属性绑定）
+        let currentSort = 'default';
+
+        function sortTable(type) {
+            currentSort = type;
+            const table = document.getElementById('costTable');
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr:not(.total-row)'));
+            const totalRow = tbody.querySelector('.total-row');
+
+            // 更新按钮状态
+            document.querySelectorAll('.sort-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.sort === type);
+            });
+
+            // 排序
+            if (type === 'price-asc') {
+                rows.sort((a, b) => {
+                    const priceA = parseFloat(a.querySelector('.price')?.textContent.replace(/[^0-9.]/g, '')) || 0;
+                    const priceB = parseFloat(b.querySelector('.price')?.textContent.replace(/[^0-9.]/g, '')) || 0;
+                    return priceA - priceB;
+                });
+            } else if (type === 'price-desc') {
+                rows.sort((a, b) => {
+                    const priceA = parseFloat(a.querySelector('.price')?.textContent.replace(/[^0-9.]/g, '')) || 0;
+                    const priceB = parseFloat(b.querySelector('.price')?.textContent.replace(/[^0-9.]/g, '')) || 0;
+                    return priceB - priceA;
+                });
             } else {
-                return dir * ((parseFloat(aText) || 0) - (parseFloat(bText) || 0));
-            }
-        });
-        tbody.innerHTML = '';
-        rows.forEach(row => tbody.appendChild(row));
-        if (totalRow) tbody.appendChild(totalRow);
-        // 更新排序图标
-        document.querySelectorAll('.sort-icon').forEach((icon, i) => {
-            icon.textContent = (i === colIndex) ? (sortState.asc ? '↑' : '↓') : '↕️';
-        });
-    }
-
-    // 导航平滑滚动
-    document.querySelectorAll('nav a').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.getElementById(this.getAttribute('href').substring(1));
-            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-    });
-
-    // 滚动高亮导航（使用 IntersectionObserver 替代 scroll 事件）
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('nav a');
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const id = entry.target.getAttribute('id');
-                navLinks.forEach(link => {
-                    link.classList.toggle('nav-active', link.getAttribute('href') === '#' + id);
+                // 默认顺序按类别
+                const order = ['transport', 'ticket', 'food', 'other'];
+                rows.sort((a, b) => {
+                    const catA = a.dataset.category;
+                    const catB = b.dataset.category;
+                    return order.indexOf(catA) - order.indexOf(catB);
                 });
             }
+
+            // 重新插入行
+            rows.forEach(row => tbody.insertBefore(row, totalRow));
+        }
+
+        // 排序按钮事件绑定（通过 data-sort）
+        document.querySelectorAll('.sort-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                sortTable(btn.dataset.sort);
+            });
         });
-    }, { rootMargin: '-20% 0px -60% 0px' });
-    sections.forEach(section => observer.observe(section));
-</script>
+
+        // 导航高亮（requestAnimationFrame 节流）
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-links a');
+
+        function highlightNav() {
+            const scrollY = window.scrollY;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+
+                if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + sectionId) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }
+
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(() => { highlightNav(); ticking = false; });
+                ticking = true;
+            }
+        });
+        highlightNav();
+    </script>
+
 </body>
 </html>
