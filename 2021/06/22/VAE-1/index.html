@@ -27,17 +27,18 @@
 <meta property="og:site_name" content="陈子强的博客">
 <meta property="og:description" content="Auto-Encoder">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20210622/image-20210622142216740.6aluuxsyd9g0.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20210622/VAE2.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20210622/VAE3.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200924153534286.png#pic_center">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20210622/VAE4.png">
 <meta property="article:published_time" content="2021-06-22T01:13:31.000Z">
-<meta property="article:modified_time" content="2026-05-16T04:29:53.662Z">
+<meta property="article:modified_time" content="2026-05-16T11:03:59.374Z">
 <meta property="article:author" content="zqchen">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="机器学习">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20210622/VAE2.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20210622/image-20210622142216740.6aluuxsyd9g0.png">
 
 <link rel="canonical" href="https://czq1999.github.io/2021/06/22/VAE-1/">
 
@@ -333,7 +334,7 @@ mjx-container[display="true"] + br {
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-05-16 12:29:53" itemprop="dateModified" datetime="2026-05-16T12:29:53+08:00">2026-05-16</time>
+                <time title="修改时间：2026-05-16 19:03:59" itemprop="dateModified" datetime="2026-05-16T19:03:59+08:00">2026-05-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -360,51 +361,29 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
 
       
-        <ul>
-<li><h1 id="Auto-Encoder"><a href="#Auto-Encoder" class="headerlink" title="Auto-Encoder"></a>Auto-Encoder</h1></li>
+        <h1 id="Auto-Encoder"><a href="#Auto-Encoder" class="headerlink" title="Auto-Encoder"></a>Auto-Encoder</h1><span id="more"></span>
+
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>定义：Auto-Encoder是一种通过无监督的方式来学习一组数据的有效表示。</p>
+<h2 id="形式"><a href="#形式" class="headerlink" title="形式"></a>形式</h2><p>形式：原始D维样本-&gt;Encoder-&gt;M维-&gt;Decoder-&gt;D维</p>
+<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>目标：自编码器的学习 目标是最小化重构误差，即经过Decoder还原的向量与原始向量相差最小。</p>
+<h2 id="示意图"><a href="#示意图" class="headerlink" title="示意图"></a>示意图</h2><p><img src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20210622/image-20210622142216740.6aluuxsyd9g0.png"></p>
+<h2 id="变形"><a href="#变形" class="headerlink" title="变形"></a>变形</h2><ul>
+<li><p>稀疏自编码器</p>
+<p>基本的自编码器通常是学习低维的编码，当需要学习的隐藏维度D大于样本的维度，同时希望编码尽可能的稀疏，这就是稀疏自编码器。</p>
+</li>
+<li><p>堆叠自编码器</p>
+<p>两层神经网络的自编码器不足以获得好的数据表示，使用更深的网络以捕获数据的语义信息，这就是堆叠自编码器。</p>
+</li>
+<li><p>降噪自编码器</p>
+<p>原始数据引入噪声，再送入Encoder,让Decoder的输出还原原始输入。</p>
+<p>如何引入噪声：输入的数据随机用0进行mask</p>
+</li>
 </ul>
-<span id="more"></span>
-<pre><code>## 定义
-
-定义：Auto-Encoder是一种通过无监督的方式来学习一组数据的有效表示。
-
-## 形式
-
-形式：原始D维样本-&gt;Encoder-&gt;M维-&gt;Decoder-&gt;D维
-
-## 目标
-
-目标：自编码器的学习 目标是最小化重构误差，即经过Decoder还原的向量与原始向量相差最小。
-
-## 示意图
-
-![](https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20210622/image-20210622142216740.6aluuxsyd9g0.png)
-
-## 变形
-
--   稀疏自编码器
-    
-    基本的自编码器通常是学习低维的编码，当需要学习的隐藏维度D大于样本的维度，同时希望编码尽可能的稀疏，这就是稀疏自编码器。
-    
--   堆叠自编码器  
-    两层神经网络的自编码器不足以获得好的数据表示，使用更深的网络以捕获数据的语义信息，这就是堆叠自编码器。
-    
--   降噪自编码器
-    
-    原始数据引入噪声，再送入Encoder,让Decoder的输出还原原始输入。
-    
-    如何引入噪声：输入的数据随机用0进行mask
-    
-
-## 特点
-
--   非监督学习
-    
--   拥有特征提取能力
-    
--   使用神经网络对数据进行降维，这是一种非线性的
-    
-</code></pre>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ul>
+<li>非监督学习</li>
+<li>拥有特征提取能力</li>
+<li>使用神经网络对数据进行降维，这是一种非线性的</li>
+</ul>
 <h2 id="变分自编码器"><a href="#变分自编码器" class="headerlink" title="变分自编码器"></a>变分自编码器</h2><p>​ VAE 产生了输入数据中不包含的数据，（可以认为产生了含有某种特定信息的新的数据），而 AE 只能产生尽可能接近或者就是以前的数据（当数据简单时，编码解码损耗少时）。</p>
 <p>​ 若给定一个数据集，如果我们想要根据这个来生成新的数据。假如我们知道这个分布是什么样，那么我们就可以在这个分布上进行sample进而便可以生成出新的数据。如下图的宝可梦服从<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.753ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 2101 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D443" d="M287 628Q287 635 230 637Q206 637 199 638T192 648Q192 649 194 659Q200 679 203 681T397 683Q587 682 600 680Q664 669 707 631T751 530Q751 453 685 389Q616 321 507 303Q500 302 402 301H307L277 182Q247 66 247 59Q247 55 248 54T255 50T272 48T305 46H336Q342 37 342 35Q342 19 335 5Q330 0 319 0Q316 0 282 1T182 2Q120 2 87 2T51 1Q33 1 33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM645 554Q645 567 643 575T634 597T609 619T560 635Q553 636 480 637Q463 637 445 637T416 636T404 636Q391 635 386 627Q384 621 367 550T332 412T314 344Q314 342 395 342H407H430Q542 342 590 392Q617 419 631 471T645 554Z"></path></g><g data-mml-node="mo" transform="translate(751,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(1140,0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g><g data-mml-node="mo" transform="translate(1712,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g></svg></mjx-container>分布，我们如果知道这个分布便可以进行生成新的数据，但是现在并不知道这个分布啊。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/czq1999/image-hosting@master/20210622/VAE2.png"></p>
@@ -518,7 +497,7 @@ mjx-container[display="true"] + br {
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Auto-Encoder"><span class="nav-number">1.</span> <span class="nav-text">Auto-Encoder</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E5%88%86%E8%87%AA%E7%BC%96%E7%A0%81%E5%99%A8"><span class="nav-number">1.1.</span> <span class="nav-text">变分自编码器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC"><span class="nav-number">1.1.1.</span> <span class="nav-text">公式推导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E8%B4%A8"><span class="nav-number">1.1.2.</span> <span class="nav-text">本质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8EGAN%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.3.</span> <span class="nav-text">与GAN的区别</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Auto-Encoder"><span class="nav-number">1.</span> <span class="nav-text">Auto-Encoder</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BD%A2%E5%BC%8F"><span class="nav-number">1.2.</span> <span class="nav-text">形式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87"><span class="nav-number">1.3.</span> <span class="nav-text">目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A4%BA%E6%84%8F%E5%9B%BE"><span class="nav-number">1.4.</span> <span class="nav-text">示意图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E5%BD%A2"><span class="nav-number">1.5.</span> <span class="nav-text">变形</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E7%82%B9"><span class="nav-number">1.6.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E5%88%86%E8%87%AA%E7%BC%96%E7%A0%81%E5%99%A8"><span class="nav-number">1.7.</span> <span class="nav-text">变分自编码器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC"><span class="nav-number">1.7.1.</span> <span class="nav-text">公式推导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E8%B4%A8"><span class="nav-number">1.7.2.</span> <span class="nav-text">本质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8EGAN%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.7.3.</span> <span class="nav-text">与GAN的区别</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
